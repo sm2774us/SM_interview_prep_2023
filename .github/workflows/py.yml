@@ -44,4 +44,4 @@ jobs:
       - run: poetry run isort . --check
         working-directory: /
       - run: poetry run pytest --benchmark-skip
-        working-directory /
+        working-directory: /
