@@ -16,7 +16,7 @@ keywords = [
 	"Leet Code"
 ]
 readme = "README.md"
-repository = "https://github.com/sm2774us/SM_interview_prep_2023/tree/main/py"
+repository = "https://www.github.com/sm2774us/SM_interview_prep_2023/tree/main"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
