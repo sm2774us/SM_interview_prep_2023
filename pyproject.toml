@@ -1,0 +1,113 @@
+[tool.poetry]
+name = "SM_interview_prep_2023"
+version = "0.1.0"
+description = ""
+license = { file = "LICENSE" }
+authors = [
+    { name = "Shaikat Majumdar", email = "sm2774us@gmail.com" }
+]
+maintainers = [
+    { name = "Shaikat Majumdar", email = "sm2774us@gmail.com" }
+]
+keywords = [
+    "Coding Interview",
+    "Data Structures",
+    "Algorithms",
+	"Leet Code"
+]
+readme = "README.md"
+repository = "https://github.com/sm2774us/SM_interview_prep_2023/tree/main/py"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Typing :: Typed",
+    # See https://pypi.org/classifiers/ for more classifiers
+]
+dependencies = [
+    "natsort"
+]
+include = [
+    { path = "dsa_and_algorithms" },
+    { path = "coding_interview_problems" },	
+	{ path = "curated_list_of_75_leetcode_problems" },
+	{ path = "competitive_programming_problems" },
+	{ path = "amazon_interview_prep" },
+	{ path = "facebook_interview_prep" }
+]
+exclude = [
+    "leetcode_problems"
+]
+
+[project.urls]
+GitHub = "https://www.github.com/sm2774us/SM_interview_prep_2023"
+
+# ========================== #
+#      [tool.*] Sections     #
+# ========================== #
+
+[tool.poetry.dependencies]
+python = "^3.11"
+natsort = "^8.2.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.12.0"
+isort = "^5.11.4"
+pylint = "^2.15.9"
+pytest = "^7.2.0"
+pytest-benchmark = { version = "^4.0.0", extras = ["histogram"] }
+
+[tool.poetry.scripts]
+dsa_and_algorithms = "dsa_and_algorithms.main:main"
+coding_interview_problems = "coding_interview_problems.main:main"
+curated_list_of_75_leetcode_problems = "curated_list_of_75_leetcode_problems.main:main"
+competitive_programming_problems = "competitive_programming_problems.main:main"
+amazon_interview_prep = "amazon_interview_prep.main:main"
+facebook_interview_prep = "facebook_interview_prep.main:main"
+
+[tool.poetry.plugins."dsa_and_algorithms.days"]
+day1 = "dsa_and_algorithms.001_linear_data_structures.arrays_and_strings:main"
+day2 = "dsa_and_algorithms.001_linear_data_structures.linked_lists_part_1:main"
+day3 = "dsa_and_algorithms.001_linear_data_structures.linked_lists_part_2:main"
+day4 = "dsa_and_algorithms.002_non_linear_data_structures.trees:main"
+day5 = "dsa_and_algorithms.002_non_linear_data_structures.graphs:main"
+day6 = "dsa_and_algorithms.002_non_linear_data_structures.heaps:main"
+day7 = "dsa_and_algorithms.003_abstract_data_types.stacks_and_queues:main"
+day8 = "dsa_and_algorithms.003_abstract_data_types.sets_and_maps:main"
+day9 = "dsa_and_algorithms.004_general_algorithms.recursion:main"
+day10 = "dsa_and_algorithms.004_general_algorithms.sorting_and_searching:main"
+
+[tool.poetry.plugins."coding_interview_problems.days"]
+
+[tool.poetry.plugins."curated_list_of_75_leetcode_problems.days"]
+
+[tool.poetry.plugins."competitive_programming_problems.days"]
+
+[tool.poetry.plugins."amazon_interview_prep.days"]
+
+[tool.poetry.plugins."facebook_interview_prep.days"]
+
+[tool.black]
+target_version = ["py311"]
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.format]
+max-line-length = "88"
+
+[tool.pylint.basic]
+good-names-rgxs = ["[xyz]\\d*"]
+
+[tool.pytest.ini_options]
+addopts = '--doctest-modules --benchmark-disable --benchmark-sort=fullname'
+required_plugins = ['pytest-benchmark']
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
