@@ -36,12 +36,12 @@ jobs:
           python-version: 3.11
       - uses: snok/install-poetry@v1
       - run: poetry install --no-interaction
-        working-directory: py
+        working-directory: ${GITHUB_WORKSPACE}
       - run: poetry run pylint aoc2022
-        working-directory: py
+        working-directory: ${GITHUB_WORKSPACE}
       - run: poetry run black . --check
-        working-directory: py
+        working-directory: ${GITHUB_WORKSPACE}
       - run: poetry run isort . --check
-        working-directory: py
+        working-directory: ${GITHUB_WORKSPACE}
       - run: poetry run pytest --benchmark-skip
-        working-directory: py
+        working-directory: ${GITHUB_WORKSPACE}
