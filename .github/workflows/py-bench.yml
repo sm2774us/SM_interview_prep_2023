@@ -19,8 +19,9 @@ jobs:
       - uses: snok/install-poetry@v1
       - run: poetry install --no-interaction --no-root
         if: steps.cache-deps.outputs.cache-hit != 'true'
+        working-directory: ${{ env.working-directory }}
       - run: poetry run pytest --benchmark-enable --benchmark-only --benchmark-histogram=../gh-docs/benchmark
-        working-directory: /
+        working-directory: ${{ env.working-directory }}
       - uses: EndBug/add-and-commit@v9
         with:
           cwd: gh-docs
