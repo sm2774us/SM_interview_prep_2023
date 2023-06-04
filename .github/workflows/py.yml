@@ -35,13 +35,13 @@ jobs:
         with:
           python-version: 3.11
       - uses: snok/install-poetry@v1
-      - run: poetry install --no-interaction
-        working-directory: ${GITHUB_WORKSPACE}
-      - run: poetry run pylint aoc2022
-        working-directory: ${GITHUB_WORKSPACE}
+      - run: poetry install --no-interaction --no-root
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+      - run: poetry run pylint amazon_interview_prep
+        working-directory: /
       - run: poetry run black . --check
-        working-directory: ${GITHUB_WORKSPACE}
+        working-directory: /
       - run: poetry run isort . --check
-        working-directory: ${GITHUB_WORKSPACE}
+        working-directory: /
       - run: poetry run pytest --benchmark-skip
-        working-directory: ${GITHUB_WORKSPACE}
+        working-directory /
