@@ -37,7 +37,7 @@ jobs:
       - uses: snok/install-poetry@v1
       - run: poetry install --no-interaction --no-root
         if: steps.cache-deps.outputs.cache-hit != 'true'
-      - run: poetry run pylint amazon_interview_prep
+      - run: poetry run pylint .
         working-directory: /
       - run: poetry run black . --check
         working-directory: /
