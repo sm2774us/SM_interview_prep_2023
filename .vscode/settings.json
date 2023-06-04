@@ -4,13 +4,13 @@
     // ==================== //
 
     "terminal.integrated.env.windows": {
-        "PYTHONPATH": "${workspaceFolder}"
+        "PYTHONPATH": "${workspaceFolder}/dsa_and_algorithms:${workspaceFolder}/coding_interview_problems:${workspaceFolder}/competitive_programming_problems:${workspaceFolder}/curated_list_of_75_leetcode_problems:${workspaceFolder}/amazon_interview_prep:${workspaceFolder}/facebook_interview_prep:${env:PYTHONPATH}"
     },
     "terminal.integrated.env.linux": {
-        "PYTHONPATH": "${workspaceFolder}"
+        "PYTHONPATH": "${workspaceFolder}/dsa_and_algorithms:${workspaceFolder}/coding_interview_problems:${workspaceFolder}/competitive_programming_problems:${workspaceFolder}/curated_list_of_75_leetcode_problems:${workspaceFolder}/amazon_interview_prep:${workspaceFolder}/facebook_interview_prep:${env:PYTHONPATH}"
     },
     "terminal.integrated.env.osx": {
-        "PYTHONPATH": "${workspaceFolder}"
+        "PYTHONPATH": "${workspaceFolder}/dsa_and_algorithms:${workspaceFolder}/coding_interview_problems:${workspaceFolder}/competitive_programming_problems:${workspaceFolder}/curated_list_of_75_leetcode_problems:${workspaceFolder}/amazon_interview_prep:${workspaceFolder}/facebook_interview_prep:${env:PYTHONPATH}"
     },
 
     // ==================== //
