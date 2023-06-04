@@ -29,9 +29,6 @@ classifiers = [
     "Typing :: Typed",
     # See https://pypi.org/classifiers/ for more classifiers
 ]
-dependencies = [
-    "natsort"
-]
 include = [
     { path = "dsa_and_algorithms" },
     { path = "coding_interview_problems" },	
