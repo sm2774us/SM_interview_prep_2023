@@ -11,7 +11,11 @@ on:
       - 'amazon_interview_prep/**'
       - 'facebook_interview_prep/**'
   pull_request:
-    branches: [ main ]
+    types:
+      - opened
+    branches:
+      - 'releases/**'  
+    paths:
       - 'dsa_and_algorithms/**'
       - 'coding_interview_problems/**'
       - 'competitive_programming_problems/**'
