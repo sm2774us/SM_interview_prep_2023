@@ -4,13 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  get-inputs:
-    uses: ephemient/aoc2022/.github/workflows/get-inputs.yml@main
-    secrets:
-      SESSION: ${{ secrets.SESSION }}
-
   build:
-    needs: [ get-inputs ]
     runs-on: ubuntu-latest
 
     steps:
@@ -19,10 +13,6 @@ jobs:
         with:
           ref: gh-docs
           path: gh-docs
-      - uses: actions/download-artifact@v3
-        with:
-          name: inputs
-          path: py/aoc2022
       - uses: actions/setup-python@v4
         with:
           python-version: 3.11

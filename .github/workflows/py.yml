@@ -3,10 +3,10 @@ name: Python CI
 on:
   push:
     branches: [ main ]
-    paths: [ py/** ]
+    paths: [ dsa_and_algorithms/**, coding_interview_problems/**, competitive_programming_problems/**, curated_list_of_75_leetcode_problems/**, amazon_interview_prep/**, facebook_interview_prep/** ]
   pull_request:
     branches: [ main ]
-    paths: [ py/** ]
+    paths: [ dsa_and_algorithms/**, coding_interview_problems/**, competitive_programming_problems/**, curated_list_of_75_leetcode_problems/**, amazon_interview_prep/**, facebook_interview_prep/** ]
 
   workflow_dispatch:
 
