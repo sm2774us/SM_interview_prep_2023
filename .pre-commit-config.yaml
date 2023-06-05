@@ -1,0 +1,49 @@
+# pre-commit is a tool to perform a predefined set of tasks manually and/or
+# automatically before git commits are made.
+#
+# Config reference: https://pre-commit.com/#pre-commit-configyaml---top-level
+#
+# Common tasks
+#
+# - Run on all files:   pre-commit run --all-files
+# - Register git hooks: pre-commit install --install-hooks
+#
+# About bash scripts autoformatting
+#
+# All hooks in this file can automatically be installed by pre-commit, but the
+# hook we want to use for bash script formatting, shellcheck, must be manually
+# installed. If needed, install it and run it using the link and snippet below.
+#
+#   https://github.com/koalaman/shellcheck#installing
+#
+#   pre-commit run --config .pre-commit-config-shellcheck.yaml --all-files
+#
+repos:
+  # Autoformat: Python code
+  - repo: https://github.com/psf/black
+    rev: 23.3.0
+    hooks:
+      - id: black
+        entry: bash -c 'black "$@"; git add -u' --
+        exclude: ^(tests/|\.github/|\.venv/|\.vscode/)
+        args:
+          - --target-version=py311
+
+  # Autoformat: Python code
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        entry: bash -c 'isort "$@"; git add -u' --
+        args:
+          - --profile=black
+
+  # Autoformat: Bash scripts
+  - repo: https://github.com/lovesegfault/beautysh
+    rev: v6.2.1
+    hooks:
+      - id: beautysh
+
+# pre-commit.ci config reference: https://pre-commit.ci/#configuration
+ci:
+  autoupdate_schedule: monthly
