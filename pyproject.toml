@@ -64,16 +64,16 @@ amazon_interview_prep = "amazon_interview_prep.main:main"
 facebook_interview_prep = "facebook_interview_prep.main:main"
 
 [tool.poetry.plugins."dsa_and_algorithms.days"]
-day1 = "dsa_and_algorithms.001_linear_data_structures.arrays_and_strings:main"
-day2 = "dsa_and_algorithms.001_linear_data_structures.linked_lists_part_1:main"
-day3 = "dsa_and_algorithms.001_linear_data_structures.linked_lists_part_2:main"
-day4 = "dsa_and_algorithms.002_non_linear_data_structures.trees:main"
-day5 = "dsa_and_algorithms.002_non_linear_data_structures.graphs:main"
-day6 = "dsa_and_algorithms.002_non_linear_data_structures.heaps:main"
-day7 = "dsa_and_algorithms.003_abstract_data_types.stacks_and_queues:main"
-day8 = "dsa_and_algorithms.003_abstract_data_types.sets_and_maps:main"
-day9 = "dsa_and_algorithms.004_general_algorithms.recursion:main"
-day10 = "dsa_and_algorithms.004_general_algorithms.sorting_and_searching:main"
+day1 = "dsa_and_algorithms.linear_data_structures.arrays_and_strings:main"
+day2 = "dsa_and_algorithms.linear_data_structures.linked_lists_part_1:main"
+day3 = "dsa_and_algorithms.linear_data_structures.linked_lists_part_2:main"
+day4 = "dsa_and_algorithms.non_linear_data_structures.trees:main"
+day5 = "dsa_and_algorithms.non_linear_data_structures.graphs:main"
+day6 = "dsa_and_algorithms.non_linear_data_structures.heaps:main"
+day7 = "dsa_and_algorithms.abstract_data_types.stacks_and_queues:main"
+day8 = "dsa_and_algorithms.abstract_data_types.sets_and_maps:main"
+day9 = "dsa_and_algorithms.general_algorithms.recursion:main"
+day10 = "dsa_and_algorithms.general_algorithms.sorting_and_searching:main"
 
 [tool.poetry.plugins."coding_interview_problems.days"]
 

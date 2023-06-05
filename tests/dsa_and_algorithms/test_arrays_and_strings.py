@@ -2,7 +2,7 @@ from typing import List
 
 import pytest
 
-from dsa_and_algorithms.001_linear_data_structures.001_arrays_and_strings import (
+from dsa_and_algorithms.linear_data_structures.arrays_and_strings import (
     are_anagrams,
     arrays_are_equal,
     find_all_anagrams,
