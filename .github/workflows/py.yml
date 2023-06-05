@@ -2,7 +2,8 @@ name: Python CI
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
     paths:
       - 'dsa_and_algorithms/**'
       - 'coding_interview_problems/**'
@@ -22,6 +23,7 @@ on:
       - 'curated_list_of_75_leetcode_problems/**'
       - 'amazon_interview_prep/**'
       - 'facebook_interview_prep/**'
+  workflow_dispatch:
 
 jobs:
   build:
