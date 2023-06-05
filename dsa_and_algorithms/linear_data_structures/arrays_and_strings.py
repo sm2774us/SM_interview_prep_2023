@@ -20,7 +20,6 @@ In your interview, you may want to use these inbuilt functions, but while
 learning, you will learn more by doing things the hard way.
 """
 
-from collections import Counter
 from typing import List
 
 """
@@ -32,13 +31,14 @@ Space Complexity: O(1)
 """
 
 
-def reverse_array(arr: List[int]):
+def reverse_array(arr: List[int]) -> List[int]:
     # We will iterate to the midpoint of the array. For each value, we can
     # get the index its supposed to swap with by computing arr.length-i-1
     for i in range(len(arr) // 2):
         temp = arr[i]
         arr[i] = arr[len(arr) - i - 1]
         arr[len(arr) - i - 1] = temp
+    return arr
 
 
 """
