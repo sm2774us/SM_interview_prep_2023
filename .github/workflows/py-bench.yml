@@ -6,13 +6,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+        working-directory: ./
 
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/checkout@v3
-        with:
-          ref: gh-docs
-          path: gh-docs
       - uses: actions/setup-python@v4
         with:
           python-version: 3.11
@@ -25,6 +23,6 @@ jobs:
         working-directory: ${{ env.working-directory }}
       - uses: EndBug/add-and-commit@v9
         with:
-          cwd: gh-docs
+          cwd: ${{ env.working-directory }}
           add: benchmark.svg
           message: 'pytest-benchmark ${{ github.sha }}'

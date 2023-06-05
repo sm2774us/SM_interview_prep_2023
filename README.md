@@ -6,9 +6,12 @@ My Interview Prep for 2023
  - pip install pre-commit
 
 ```bash
+pre-commit install
+pre-commit run --all-files
 poetry run black .
 poetry run isort .
 git add .
+pre-commit run --all-files
 git commit
 git push
 ```
