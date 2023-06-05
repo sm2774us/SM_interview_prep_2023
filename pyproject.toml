@@ -86,11 +86,14 @@ day10 = "dsa_and_algorithms.004_general_algorithms.sorting_and_searching:main"
 [tool.poetry.plugins."facebook_interview_prep.days"]
 
 [tool.black]
+line-length = 200
 target_version = ["py311"]
+include = '\.pyi?$'
+extend-exclude = '''.*test_.*'''
 
 [tool.isort]
 profile = "black"
-line_length = 120
+line_length = 200
 multi_line_output = 3
 use_parentheses = true
 include_trailing_comma = true
@@ -111,7 +114,7 @@ disable = "C0111,C0301,C0302,C0304,R0801,R0903,R0912,R0914,W0511,E1136,W1514"
 module-rgx = "(([a-z_][a-z0-9_]*)|([a-z][a-zA-Z0-9]+))$"
 
 [tool.pylint.FORMAT]
-max-line-length = "120"
+max-line-length = "200"
 
 [tool.pylint.DESIGN]
 max-args = "14"

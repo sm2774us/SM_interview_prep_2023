@@ -2,7 +2,6 @@ from typing import List
 
 import pytest
 
-# fmt: off
 from dsa_and_algorithms.001_linear_data_structures.001_arrays_and_strings import (
     reverse_array,
     remove_even,
@@ -21,7 +20,6 @@ from dsa_and_algorithms.001_linear_data_structures.001_arrays_and_strings import
     find_all_anagrams,
     smallest_substring,
 )
-# fmt: on
 
 @pytest.mark.parametrize(
     "input_array,expected",
