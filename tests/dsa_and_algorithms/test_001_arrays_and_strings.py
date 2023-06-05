@@ -2,6 +2,7 @@ from typing import List
 
 import pytest
 
+# fmt: off
 from dsa_and_algorithms.001_linear_data_structures.001_arrays_and_strings import (
     reverse_array,
     remove_even,
@@ -20,6 +21,7 @@ from dsa_and_algorithms.001_linear_data_structures.001_arrays_and_strings import
     find_all_anagrams,
     smallest_substring,
 )
+# fmt: on
 
 @pytest.mark.parametrize(
     "input_array,expected",
@@ -44,21 +46,45 @@ def test_zig_zag(input_string: str, num_rows: int, expected: str) -> None:
     
 @pytest.mark.parametrize(
     "input_array,expected",
-    [[[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20]], [1, 2, 3, 4, 5, 10, 9, 8, 7, 6, 11, 12, 13, 14, 15, 20, 19, 18, 17, 16]],
+    [
+        [
+            [1, 2, 3, 4, 5],
+            [6, 7, 8, 9, 10],
+            [11, 12, 13, 14, 15],
+            [16, 17, 18, 19, 20]
+        ],
+        [1, 2, 3, 4, 5, 10, 9, 8, 7, 6, 11, 12, 13, 14, 15, 20, 19, 18, 17, 16]
+    ],
 )
 def test_print_back_and_forth(input_array: List[List[int]], expected: List[int]) -> None:
     assert print_back_and_forth(input_array) == expected
 
 @pytest.mark.parametrize(
     "input_array,expected",
-    [[[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20]], [1, 2, 3, 4, 5, 10, 15, 20, 19, 18, 17, 16, 11, 6, 7, 8, 9, 14, 13, 12]],
+    [
+        [
+            [1, 2, 3, 4, 5],
+            [6, 7, 8, 9, 10],
+            [11, 12, 13, 14, 15],
+            [16, 17, 18, 19, 20]
+        ],
+        [1, 2, 3, 4, 5, 10, 15, 20, 19, 18, 17, 16, 11, 6, 7, 8, 9, 14, 13, 12]
+    ],
 )
 def test_print_spiral(input_array: List[List[int]], expected: List[int]) -> None:
     assert print_spiral(input_array) == expected
 
 @pytest.mark.parametrize(
     "input_array,expected",
-    [[[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20]], [1, 2, 6, 11, 7, 3, 4, 8, 12, 16, 17, 13, 9, 5, 10, 14, 18, 19, 15, 20]],
+    [
+        [
+            [1, 2, 3, 4, 5],
+            [6, 7, 8, 9, 10],
+            [11, 12, 13, 14, 15],
+            [16, 17, 18, 19, 20]
+        ],
+        [1, 2, 6, 11, 7, 3, 4, 8, 12, 16, 17, 13, 9, 5, 10, 14, 18, 19, 15, 20]
+    ],
 )
 def test_print_diagonals(input_array: List[List[int]], expected: List[int]) -> None:
     assert print_diagonals(input_array) == expected
