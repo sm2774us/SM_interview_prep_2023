@@ -3,23 +3,24 @@ from typing import List
 import pytest
 
 from dsa_and_algorithms.001_linear_data_structures.001_arrays_and_strings import (
-    reverse_array,
-    remove_even,
-    zig_zag,
-    print_back_and_forth,
-    print_spiral,
-    print_diagonals,
-    print_substrings,
-    find_duplicates,
-    two_sum,
-    arrays_are_equal,
-    strings_are_opposite,
     are_anagrams,
-    subarray_sums,
-    no_repeated_chars,
+    arrays_are_equal,
     find_all_anagrams,
+    find_duplicates,
+    no_repeated_chars,
+    print_back_and_forth,
+    print_diagonals,
+    print_spiral,
+    print_substrings,
+    remove_even,
+    reverse_array,
     smallest_substring,
+    strings_are_opposite,
+    subarray_sums,
+    two_sum,
+    zig_zag,
 )
+
 
 @pytest.mark.parametrize(
     "input_array,expected",

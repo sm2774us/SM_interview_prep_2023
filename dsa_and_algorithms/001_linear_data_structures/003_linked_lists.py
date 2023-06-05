@@ -12,19 +12,25 @@ Execution: python linked_list_solutions_part_2.py
 """
 A simple singly-linked node class (copied from Part 1)
 """
+
+
 class SinglyLinkedListNode:
     def __init__(self, val=0):
         self.val = val
         self.next = None
 
+
 """
 A simple doubly-linked node class (copied from Part 1)
 """
+
+
 class DoublyLinkedListNode:
     def __init__(self, val=0):
         self.val = val
         self.prev = None
         self.next = None
+
 
 """
 Exercise 2.1: Write a function that swaps two nodes in a doubly-linked list
@@ -34,6 +40,8 @@ Note: We do not have a dummy head, so it is not possible to swap the first node
 Time Complexity: O(max(n, m))
 Space Complexity: O(1)
 """
+
+
 def swap_nodes(l: DoublyLinkedListNode, n: int, m: int):
     if n < 0 or m < 0:
         raise IndexError()
@@ -44,7 +52,7 @@ def swap_nodes(l: DoublyLinkedListNode, n: int, m: int):
     nNode = l
     mNode = l
     curr = l
-    for i in range(max(n,m)+1):
+    for i in range(max(n, m) + 1):
         # If we reach the end of the list, then one of our indices is out of
         # bounds
         if not curr:
@@ -101,6 +109,7 @@ def swap_nodes(l: DoublyLinkedListNode, n: int, m: int):
         prev.next = mNode
         next.prev = nNode
 
+
 """
 Exercise 2.2: Write a function that removes the odd-indexed values from a
 singly-linked list
@@ -108,11 +117,14 @@ singly-linked list
 Time Complexity: O(length(l))
 Space Complexity: O(1)
 """
+
+
 def remove_odd(l: SinglyLinkedListNode):
     curr = l
     while curr and curr.next:
         curr.next = curr.next.next
         curr = curr.next
+
 
 """
 Exercise 2.3: Write a function that de-interleaves the even and odd indices in a
@@ -122,6 +134,8 @@ followed by all the odd indices
 Time Complexity: O(length(l))
 Space Complexity: O(1)
 """
+
+
 def deinterleave(l: SinglyLinkedListNode):
     if l == None or l.next == None:
         return
@@ -163,12 +177,15 @@ def deinterleave(l: SinglyLinkedListNode):
     # Merge the two lists together
     evens.next = oddsStart
 
+
 """
 Exercise 2.4: Write a function that reverses a singly-linked list
 
 Time Complexity: O(length(l))
 Space Complexity: O(1)
 """
+
+
 def reverse(l: SinglyLinkedListNode) -> SinglyLinkedListNode:
     # Track the previous because we will point the current node back
     prev = None
@@ -184,6 +201,7 @@ def reverse(l: SinglyLinkedListNode) -> SinglyLinkedListNode:
 
     return prev
 
+
 """
 Exercise 3.1: Write a function that compares 2 singly-linked lists and returns
 true if the two lists are identical
@@ -191,6 +209,8 @@ true if the two lists are identical
 Time Complexity: O(min(length(l1), length(l2)))
 Space Complexity: O(1)
 """
+
+
 def are_equal(l1: SinglyLinkedListNode, l2: SinglyLinkedListNode) -> bool:
     # Iterate over both lists simultaneously and compare each value
     while l1 and l2:
@@ -202,6 +222,7 @@ def are_equal(l1: SinglyLinkedListNode, l2: SinglyLinkedListNode) -> bool:
     # If there are no values that don't match, the lists are equal
     return not l1 and not l2
 
+
 """
 Exercise 3.2: Write a function that returns the nth-to-last value in a
 singly-linked list
@@ -210,6 +231,8 @@ singly-linked list
 Time Complexity: O(length(l))
 Space Complexity: O(1)
 """
+
+
 def nth_to_last(l: SinglyLinkedListNode, n: int) -> SinglyLinkedListNode:
     # We will use a fast and slow pointer that are exactly n nodes apart. When
     # fast reaches the end of the list, slow will be at the nth-to-last element
@@ -229,6 +252,7 @@ def nth_to_last(l: SinglyLinkedListNode, n: int) -> SinglyLinkedListNode:
 
     return slow
 
+
 """
 Exercise 3.3: Write a function that returns the value at the midpoint of a
 singly-linked list. You can assume the length of the list is odd.
@@ -236,6 +260,8 @@ singly-linked list. You can assume the length of the list is odd.
 Time Complexity: O(length(l))
 Space Complexity: O(1)
 """
+
+
 def midpoint(l: SinglyLinkedListNode) -> SinglyLinkedListNode:
     if l.next == None:
         return l
@@ -252,12 +278,15 @@ def midpoint(l: SinglyLinkedListNode) -> SinglyLinkedListNode:
 
     return slow
 
+
 """
 Exercise 4.1: Remove all occurrences of n from a singly-linked list
 
 Time Complexity: O(length(l))
 Space Complexity: O(1)
 """
+
+
 def remove_all(l: SinglyLinkedListNode, n: int) -> SinglyLinkedListNode:
     # Use a dummy node to make it easy if we have to remove the first node in
     # the list
@@ -276,6 +305,7 @@ def remove_all(l: SinglyLinkedListNode, n: int) -> SinglyLinkedListNode:
     # dummy.next points to the current head of the list
     return dummy.next
 
+
 """
 Exercise 5.1: Given a singly-linked list, determine if the list contains a
 cycle. DO NOT use Floyd’s algorithm. FInd some other method for identifying a
@@ -284,6 +314,8 @@ cycle
 Time Complexity: O(length(l))
 Space Complexity: O(length(l))
 """
+
+
 def has_cycle_naive(l: SinglyLinkedListNode) -> bool:
     # Add all nodes to a set and see if we visit them more than once
     visited = set()
@@ -301,6 +333,7 @@ def has_cycle_naive(l: SinglyLinkedListNode) -> bool:
     # If we get to the end of the list there is no cycle
     return False
 
+
 """
 Exercise 5.2: Given a singly-linked list, determine if the list contains a cycle
 using Floyd's algorithm
@@ -308,6 +341,8 @@ using Floyd's algorithm
 Time Complexity: O(length(l))
 Space Complexity: O(1)
 """
+
+
 def has_cycle(l: SinglyLinkedListNode) -> bool:
     if l == None:
         return False
@@ -327,6 +362,7 @@ def has_cycle(l: SinglyLinkedListNode) -> bool:
 
     return False
 
+
 """
 We've included some helper methods below that you can use for your tests
 """
@@ -334,31 +370,39 @@ We've included some helper methods below that you can use for your tests
 """
 Test method to generate singly linked list with n items
 """
+
+
 def single_generator(n: int) -> SinglyLinkedListNode:
     head = SinglyLinkedListNode(1)
     curr = head
-    for i in range(2, n+1):
+    for i in range(2, n + 1):
         curr.next = SinglyLinkedListNode(i)
         curr = curr.next
 
     return head
 
+
 """
 Test method to generate doubly linked list with n items
 """
+
+
 def double_generator(n: int) -> DoublyLinkedListNode:
     head = DoublyLinkedListNode(1)
     curr = head
-    for i in range(2, n+1):
+    for i in range(2, n + 1):
         curr.next = DoublyLinkedListNode(i)
         curr.next.prev = curr
         curr = curr.next
 
     return head
 
+
 """
 Test method to print singly linked list
 """
+
+
 def print_single(n: SinglyLinkedListNode):
     curr = n
     string = []
@@ -366,11 +410,14 @@ def print_single(n: SinglyLinkedListNode):
         string.append(str(curr.val) + " -> ")
         curr = curr.next
     string.append("null")
-    print(''.join(string))
+    print("".join(string))
+
 
 """
 Test method to print doubly linked list
 """
+
+
 def print_double(n: DoublyLinkedListNode):
     if not n:
         print("null")
@@ -380,10 +427,10 @@ def print_double(n: DoublyLinkedListNode):
         string.append(str(curr.val) + " -> ")
         curr = curr.next
     string.append("null")
-    print(''.join(string))
+    print("".join(string))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     d = double_generator(8)
     swap_nodes(d, 2, 6)
     print_double(d)

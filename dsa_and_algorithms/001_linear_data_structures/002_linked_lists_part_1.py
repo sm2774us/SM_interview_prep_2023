@@ -16,11 +16,14 @@ Exercise 1.1: Implement a singly-linked list
 """
 Singly linked list class
 """
+
+
 class SinglyLinkedList:
 
     """
     A simple singly-linked node class
     """
+
     class _SinglyLinkedListNode:
         def __init__(self, val=0):
             self.val = val
@@ -29,6 +32,7 @@ class SinglyLinkedList:
     """
     Constructor
     """
+
     def __init__(self):
         self.head = None
         self.length = 0
@@ -39,6 +43,7 @@ class SinglyLinkedList:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def insert(self, n: int):
         newNode = self._SinglyLinkedListNode(n)
 
@@ -49,7 +54,7 @@ class SinglyLinkedList:
         self.head = newNode
 
         # Efficient to track size as we add and remove nodes
-        self.length = self.length+1
+        self.length = self.length + 1
 
     """
     Delete the first occurrence of n from the list
@@ -57,6 +62,7 @@ class SinglyLinkedList:
     Time Complexity: O(length)
     Space Complexity: O(1)
     """
+
     def delete(self, n: int) -> bool:
         # If the list is empty, there's nothing to remove
         if self.length == 0:
@@ -81,7 +87,7 @@ class SinglyLinkedList:
                     prev.next = curr.next
 
                 # We removed a node so update the size
-                self.length = self.length-1
+                self.length = self.length - 1
                 return True
 
             # Increment prev and curr. DO NOT do "prev.next" because it  will
@@ -97,6 +103,7 @@ class SinglyLinkedList:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def size(self) -> int:
         return self.length
 
@@ -106,6 +113,7 @@ class SinglyLinkedList:
     Time Complexity: O(n)
     Space Complexity: O(n)
     """
+
     def __str__(self):
         curr = self.head
         string = []
@@ -117,7 +125,8 @@ class SinglyLinkedList:
             curr = curr.next
 
         string.append("null")
-        return ''.join(string)
+        return "".join(string)
+
 
 """
 Exercise 1.2: Implement a doubly-linked list
@@ -126,11 +135,14 @@ Exercise 1.2: Implement a doubly-linked list
 """
 Doubly linked list class
 """
+
+
 class DoublyLinkedList:
 
     """
     A simple doubly-linked node class
     """
+
     class _DoublyLinkedListNode:
         def __init__(self, val=0):
             self.val = val
@@ -140,6 +152,7 @@ class DoublyLinkedList:
     """
     Constructor
     """
+
     def __init__(self):
         self.head = None
         self.tail = None
@@ -151,8 +164,9 @@ class DoublyLinkedList:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def insert(self, n: int):
-        newNode = self._DoublyLinkedListNode(n);
+        newNode = self._DoublyLinkedListNode(n)
 
         # If list is empty (head is null) the node becomes head and tail
         if not self.head:
@@ -165,7 +179,7 @@ class DoublyLinkedList:
             self.head.prev = newNode
             self.head = newNode
 
-        self.length = self.length+1
+        self.length = self.length + 1
 
     """
     Delete the first occurrence of n from the list
@@ -173,6 +187,7 @@ class DoublyLinkedList:
     Time Complexity: O(n)
     Space Complexity: O(1)
     """
+
     def delete(self, n: int) -> bool:
         # If the list is empty we can't remove anything
         if self.length == 0:
@@ -196,7 +211,7 @@ class DoublyLinkedList:
                 else:
                     curr.next.prev = curr.prev
 
-                self.length = self.length-1
+                self.length = self.length - 1
                 return True
 
             curr = curr.next
@@ -209,6 +224,7 @@ class DoublyLinkedList:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def size(self) -> int:
         return self.length
 
@@ -218,6 +234,7 @@ class DoublyLinkedList:
     Time Complexity: O(n)
     Space Complexity: O(n)
     """
+
     def __str__(self):
         if self.length == 0:
             return "null"
@@ -233,14 +250,15 @@ class DoublyLinkedList:
             curr = curr.next
 
         string.append(str(curr.val) + " -> null")
-        return ''.join(string)
+        return "".join(string)
+
 
 """
 Sample test cases
 """
-if __name__ == '__main__':
+if __name__ == "__main__":
     l = SinglyLinkedList()
-    for i in range(6,0,-1):
+    for i in range(6, 0, -1):
         l.insert(i)
     print(l)
     print(l.delete(1))
@@ -249,7 +267,7 @@ if __name__ == '__main__':
     print(l.size())
 
     d = DoublyLinkedList()
-    for i in range(6,0,-1):
+    for i in range(6, 0, -1):
         d.insert(i)
     print(d)
     print(d.delete(1))

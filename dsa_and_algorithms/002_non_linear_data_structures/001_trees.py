@@ -14,11 +14,14 @@ from typing import List
 """
 Exercise 1.1: Implement a Binary Search Tree class
 """
+
+
 class BinarySearchTree:
 
     """
     Simple TreeNode class
     """
+
     class _TreeNode:
         def __init__(self, val: int = 0):
             self.val = val
@@ -28,6 +31,7 @@ class BinarySearchTree:
     """
     Constructor
     """
+
     def __init__(self):
         # The only thing we need to store in our object is the root
         self.root = None
@@ -38,6 +42,7 @@ class BinarySearchTree:
     Time Complexity: O(n)
     Space Complexity: O(1)
     """
+
     def insert(self, n: int):
         # If the tree is empty, make this new node the root
         if not self.root:
@@ -70,6 +75,7 @@ class BinarySearchTree:
     Time Complexity: O(n)
     Space Complexity: O(n)
     """
+
     def delete(self, n: int, curr: _TreeNode = None):
         # Recursively call our inner function
         if not curr:
@@ -126,6 +132,7 @@ class BinarySearchTree:
     Find the minimum node in a tree. We just do this by iterating as far
     to the left as we can.
     """
+
     def _min_node(self, curr: _TreeNode) -> _TreeNode:
         while curr.left:
             curr = curr.left
@@ -137,6 +144,7 @@ class BinarySearchTree:
     Time Complexity: O(n)
     Space Complexity: O(1)
     """
+
     def contains(self, n: int) -> bool:
         curr = self.root
 
@@ -160,6 +168,7 @@ class BinarySearchTree:
     Time Complexity: O(n)
     Space Complexity: O(n)
     """
+
     def serialize(self) -> str:
         # We will use a simple serialization that follows a pre-order
         # traversal. We need to remember to track all the null nodes as
@@ -172,6 +181,7 @@ class BinarySearchTree:
     Inner function to iterate over tree recursively and add each node to
     our serialized string.
     """
+
     def _serialize_inner(self, curr: _TreeNode, ser: List[str]):
         # Add the current value (or null) to our string, then go left, then
         # go right
@@ -189,6 +199,7 @@ class BinarySearchTree:
     Time Complexity: O(n)
     Space Complexity: O(n)
     """
+
     def deserialize(self, serialized: str):
         vals = serialized.split(" ")
 
@@ -204,6 +215,7 @@ class BinarySearchTree:
     We deserialize our tree by traversing the tree in the same order as
     we did to serialize it and constructing the tree as we go.
     """
+
     def _deserialize_inner(self, vals):
         # Get the current node
         val_str = vals.pop(0)
@@ -227,6 +239,7 @@ class BinarySearchTree:
     Time Complexity: O(n)
     Space Complexity: O(n)
     """
+
     def __str__(self) -> str:
         result = []
 
@@ -237,6 +250,7 @@ class BinarySearchTree:
     """
     Do an inorder traversal to generate the string
     """
+
     def _in_order_traversal(self, curr: _TreeNode, result: List[str]):
         if not curr:
             return
@@ -245,16 +259,20 @@ class BinarySearchTree:
         result.append(str(curr.val))
         self._in_order_traversal(curr.right, result)
 
+
 """
 Exercise 1.2: Implement a trie class
 """
+
+
 class Trie:
 
     """
     Simple Trie Node class
     """
+
     class _TrieNode:
-        def __init__(self, val: str = '-', is_end_of_word: bool = False):
+        def __init__(self, val: str = "-", is_end_of_word: bool = False):
             self.val = val
 
             # This is an n-ary tree so we can have many children. We also want
@@ -276,6 +294,7 @@ class Trie:
     Time Complexity: O(s.length())
     Space Complexity: O(s.length())
     """
+
     def insert(self, s: str):
         if not s or len(s) == 0:
             return
@@ -287,6 +306,7 @@ class Trie:
     characters already exist. If they don't, then we build the path in
     the tree
     """
+
     def _insert_inner(self, s: str, curr: _TrieNode, idx: int):
         # We're at the end of the string, so mark that node as the end of
         # a word
@@ -298,11 +318,11 @@ class Trie:
         # it is, we just advance to the node that already exists. If not,
         # we need to create a new node
         curr_char = s[idx]
-        if (not curr_char in curr.children):
+        if not curr_char in curr.children:
             curr.children[curr_char] = self._TrieNode(curr_char, False)
 
         curr = curr.children[curr_char]
-        self._insert_inner(s, curr, idx+1)
+        self._insert_inner(s, curr, idx + 1)
 
     """
     Does trie contain s
@@ -310,6 +330,7 @@ class Trie:
     Time Complexity: O(s.length())
     Space Complexity: O(1)
     """
+
     def contains(self, s: str) -> bool:
         curr = self.root
 
@@ -332,6 +353,7 @@ class Trie:
     Time Complexity: O(# strings with prefix * length of strings with prefix)
     Space Complexity: O(length of longest string with prefix)
     """
+
     def prefix(self, pre: str = "") -> List[str]:
         # First, we find the end of the prefix in the trie. We have to
         # traverse to the last character. If the prefix doesn't exist, then
@@ -363,6 +385,7 @@ class Trie:
     """
     Given a TrieNode, find all words that start at that node
     """
+
     def _all_strings(self, curr: _TrieNode, current_string: List[str], result: List[str]):
         # Add the current character to our result string
         current_string.append(curr.val)
@@ -373,7 +396,7 @@ class Trie:
 
         # For all the children, continue to traverse
         for c in curr.children.values():
-            self._all_strings(c, current_string ,result)
+            self._all_strings(c, current_string, result)
 
         # Backtracking. When we return back up, we want to remove the
         # character that we added to the end of currentString to reset our
@@ -386,6 +409,7 @@ class Trie:
     Time Complexity: O(# strings in trie * average string length)
     Space Complexity: O(length of longest string in trie)
     """
+
     def __str__(self) -> str:
         # We can just use our prefix function to get a list of all strings
         # in our trie
@@ -395,11 +419,14 @@ class Trie:
 """
 Simple TreeNode class for remaining exercises
 """
+
+
 class TreeNode:
     def __init__(self, val: int):
         self.val = val
         self.left = None
         self.right = None
+
 
 """
 Exercise 2.1: Implement each tree traversal. You should implement each
@@ -412,6 +439,8 @@ Inorder Traversal - Recursive
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def in_order_traversal_recursive(root: TreeNode) -> List[int]:
     # We will fill our results into this list
     result = []
@@ -420,9 +449,12 @@ def in_order_traversal_recursive(root: TreeNode) -> List[int]:
     in_order_traversal_recursive_inner(root, result)
     return result
 
+
 """
 Inner recursive function
 """
+
+
 def in_order_traversal_recursive_inner(curr: TreeNode, result: List[int]):
     if not curr:
         return
@@ -432,12 +464,15 @@ def in_order_traversal_recursive_inner(curr: TreeNode, result: List[int]):
     result.append(curr.val)
     in_order_traversal_recursive_inner(curr.right, result)
 
+
 """
 Inorder Traversal - Iterative
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def in_order_traversal_iterative(root: TreeNode) -> List[int]:
     if not root:
         return []
@@ -466,12 +501,15 @@ def in_order_traversal_iterative(root: TreeNode) -> List[int]:
 
     return result
 
+
 """
 Preorder Traversal - Recursive
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def pre_order_traversal_recursive(root: TreeNode) -> List[int]:
     # We will fill our results into this list
     result = []
@@ -480,9 +518,12 @@ def pre_order_traversal_recursive(root: TreeNode) -> List[int]:
     pre_order_traversal_recursive_inner(root, result)
     return result
 
+
 """
 Inner recursive function
 """
+
+
 def pre_order_traversal_recursive_inner(curr: TreeNode, result: List[int]):
     if not curr:
         return
@@ -492,12 +533,15 @@ def pre_order_traversal_recursive_inner(curr: TreeNode, result: List[int]):
     pre_order_traversal_recursive_inner(curr.left, result)
     pre_order_traversal_recursive_inner(curr.right, result)
 
+
 """
 Preorder Traversal - Iterative
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def pre_order_traversal_iterative(root: TreeNode) -> List[int]:
     if not root:
         return []
@@ -523,12 +567,15 @@ def pre_order_traversal_iterative(root: TreeNode) -> List[int]:
 
     return result
 
+
 """
 Postorder Traversal - Recursive
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def post_order_traversal_recursive(root: TreeNode) -> List[int]:
     # We will fill our results into this list
     result = []
@@ -537,9 +584,12 @@ def post_order_traversal_recursive(root: TreeNode) -> List[int]:
     post_order_traversal_recursive_inner(root, result)
     return result
 
+
 """
 Inner recursive function
 """
+
+
 def post_order_traversal_recursive_inner(curr: TreeNode, result: List[int]):
     if not curr:
         return
@@ -549,12 +599,15 @@ def post_order_traversal_recursive_inner(curr: TreeNode, result: List[int]):
     post_order_traversal_recursive_inner(curr.right, result)
     result.append(curr.val)
 
+
 """
 Postorder Traversal - Iterative
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def post_order_traversal_iterative(root: TreeNode) -> List[int]:
     if not root:
         return []
@@ -580,12 +633,15 @@ def post_order_traversal_iterative(root: TreeNode) -> List[int]:
     result.reverse()
     return result
 
+
 """
 Levelorder Traversal - Recursive
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def level_order_traversal_recursive(root: TreeNode) -> List[int]:
     # We will get a list for each level and then merge them together
     levels = []
@@ -598,9 +654,12 @@ def level_order_traversal_recursive(root: TreeNode) -> List[int]:
 
     return result
 
+
 """
 Inner recursive function
 """
+
+
 def level_order_traversal_recursive_inner(curr: TreeNode, levels: List[List[int]], level: int):
     if not curr:
         return
@@ -613,8 +672,9 @@ def level_order_traversal_recursive_inner(curr: TreeNode, levels: List[List[int]
     levels[level].append(curr.val)
 
     # Continue our recursion
-    level_order_traversal_recursive_inner(curr.left, levels, level+1)
-    level_order_traversal_recursive_inner(curr.right, levels, level+1)
+    level_order_traversal_recursive_inner(curr.left, levels, level + 1)
+    level_order_traversal_recursive_inner(curr.right, levels, level + 1)
+
 
 """
 Levelorder Traversal - Iterative
@@ -622,6 +682,8 @@ Levelorder Traversal - Iterative
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def level_order_traversal_iterative(root: TreeNode) -> List[int]:
     # Fairly standard BFS implementation. We will use a queue to track
     # which nodes we've visited so far
@@ -644,6 +706,7 @@ def level_order_traversal_iterative(root: TreeNode) -> List[int]:
 
     return result
 
+
 """
 Exercise 3.1: Implement a function that determines whether a Binary Tree
 contains a value.
@@ -651,6 +714,8 @@ contains a value.
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def contains_value(root: TreeNode, val: int) -> bool:
     # If None, we didn't find the value
     if not root:
@@ -663,6 +728,7 @@ def contains_value(root: TreeNode, val: int) -> bool:
     # See if the value is in either subtree
     return contains_value(root.left, val) or contains_value(root.right, val)
 
+
 """
 Exercise 3.2: Implement a function that determines whether a Binary Tree
 contains a value. If the tree contains the value, return the path to that
@@ -671,6 +737,8 @@ node
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def path_to_node(root: TreeNode, val: int) -> List[int]:
     # If None, there is no path so return None
     if not root:
@@ -703,12 +771,15 @@ def path_to_node(root: TreeNode, val: int) -> List[int]:
     # have a path either so return None
     return None
 
+
 """
 Exercise 4.1: Max Binary Tree Depth
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def max_depth(root: TreeNode) -> int:
     # If the node is None, the depth is 0
     if not root:
@@ -718,12 +789,15 @@ def max_depth(root: TreeNode) -> int:
     # subtrees plus 1 to include the current node
     return max(max_depth(root.left), max_depth(root.right)) + 1
 
+
 """
 Exercise 4.2: Lowest Common Ancestor
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def lowest_common_ancestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
     # Find the path to each node. Then find where the paths diverge and
     # the last common node is the lowest common ancestor
@@ -741,10 +815,13 @@ def lowest_common_ancestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode
 
     return curr
 
+
 """
 This is copied from pathToNode and modified to find the nodes rather than
 the values
 """
+
+
 def lca_path_to_node(root: TreeNode, val: TreeNode) -> List[TreeNode]:
     if not root:
         return None
@@ -773,20 +850,26 @@ def lca_path_to_node(root: TreeNode, val: TreeNode) -> List[TreeNode]:
     # have a path either so return None
     return None
 
+
 """
 Exercise 4.3: Balanced Binary Tree
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def is_balanced(root: TreeNode) -> bool:
     return is_balanced_inner(root)[0]
+
 
 """
 Compute whether subtree is balanced and also get the height of the
 subtree. Easy to do this by passing an array with the height and
 updating the value
 """
+
+
 def is_balanced_inner(root: TreeNode) -> (bool, int):
     # If None, the tree is balanced and height 0
     if not root:
@@ -803,7 +886,8 @@ def is_balanced_inner(root: TreeNode) -> (bool, int):
     if abs(left[1] - right[1]) > 1:
         return False, 0
 
-    return True, max(left[1], right[1])+1
+    return True, max(left[1], right[1]) + 1
+
 
 """
 Exercise 4.4: Merge Binary Trees
@@ -811,6 +895,8 @@ Exercise 4.4: Merge Binary Trees
 Time Complexity: O(nodes in t1 + nodes in t2)
 Space Complexity: O(max(nodes in t1, nodes in t2))
 """
+
+
 def merge_trees(t1: TreeNode, t2: TreeNode) -> TreeNode:
     # If trees are None, merged tree is also None
     if not t1 and not t2:
@@ -839,12 +925,15 @@ def merge_trees(t1: TreeNode, t2: TreeNode) -> TreeNode:
 
     return curr
 
+
 """
 Exercise 4.5 Invert Binary Tree
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def invert_tree(root: TreeNode) -> TreeNode:
     # If None, inverted tree is None
     if not root:
@@ -858,25 +947,31 @@ def invert_tree(root: TreeNode) -> TreeNode:
     root.right = invert_tree(left)
     return root
 
+
 """
 Exercise 4.6: Diameter of Binary Tree
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def diameter_of_binary_tree(root: TreeNode) -> int:
     # Note: We have to subtract 1 at the end here because we are computing
     # the number of nodes in the diameter, whereas we actually want the
     # number of edges in the diameter, which is 1 less
     return diameter_of_binary_tree_inner(root)[0] - 1
 
+
 """
 Inner recursive function
 """
+
+
 def diameter_of_binary_tree_inner(root: TreeNode) -> (int, int):
     # Base Case. If root is None, diameter of empty tree is 0
     if not root:
-        return 0,0
+        return 0, 0
 
     # Compute diameters
     left = diameter_of_binary_tree_inner(root.left)
@@ -891,12 +986,15 @@ def diameter_of_binary_tree_inner(root: TreeNode) -> (int, int):
     # Return diameter and max height of subtree
     return diam, max(left[1], right[1]) + 1
 
+
 """
 Exercise 4.7: Tree to Linked List
 
 Time Complexity: O(nodes in tree)
 Space Complexity: O(nodes in tree)
 """
+
+
 def tree_to_list(root: TreeNode) -> TreeNode:
     # If node is None, list is None
     if not root:
@@ -916,9 +1014,12 @@ def tree_to_list(root: TreeNode) -> TreeNode:
 
     return root
 
+
 """
 Helper fucntion that merges 2 doubly linked lists into a single list
 """
+
+
 def merge_lists(a: TreeNode, b: TreeNode) -> TreeNode:
     if not a:
         return b
@@ -935,70 +1036,69 @@ def merge_lists(a: TreeNode, b: TreeNode) -> TreeNode:
     return a
 
 
-if __name__ == '__main__':
-    t = BinarySearchTree();
-    t.insert(5);
-    t.insert(2);
-    t.insert(7);
-    t.insert(1);
-    t.insert(6);
+if __name__ == "__main__":
+    t = BinarySearchTree()
+    t.insert(5)
+    t.insert(2)
+    t.insert(7)
+    t.insert(1)
+    t.insert(6)
     print(t.root.val)
 
     print(t.contains(2))
-    t.delete(5);
-    print(t);
+    t.delete(5)
+    print(t)
 
     ser = t.serialize()
-    print(ser);
+    print(ser)
 
     print(BinarySearchTree().deserialize(ser))
 
-    s = Trie();
-    s.insert("test");
-    s.insert("tester");
-    s.insert("rest");
-    print(s);
+    s = Trie()
+    s.insert("test")
+    s.insert("tester")
+    s.insert("rest")
+    print(s)
 
     print(s.contains("test"))
     print(s.contains("teste"))
 
     print(s.prefix("test"))
 
-    root = TreeNode(5);
-    root.left = TreeNode(3);
-    root.left.left = TreeNode(1);
-    root.left.right = TreeNode(4);
-    root.right = TreeNode(8);
-    root.right.left = TreeNode(7);
-    root.right.right = TreeNode(9);
+    root = TreeNode(5)
+    root.left = TreeNode(3)
+    root.left.left = TreeNode(1)
+    root.left.right = TreeNode(4)
+    root.right = TreeNode(8)
+    root.right.left = TreeNode(7)
+    root.right.right = TreeNode(9)
 
     print(in_order_traversal_recursive(root))
-    print(in_order_traversal_iterative(root));
+    print(in_order_traversal_iterative(root))
 
     print(pre_order_traversal_recursive(root))
     print(pre_order_traversal_iterative(root))
 
-    print(post_order_traversal_recursive(root));
-    print(post_order_traversal_iterative(root));
+    print(post_order_traversal_recursive(root))
+    print(post_order_traversal_iterative(root))
 
-    print(level_order_traversal_recursive(root));
-    print(level_order_traversal_iterative(root));
+    print(level_order_traversal_recursive(root))
+    print(level_order_traversal_iterative(root))
 
-    print(contains_value(root, 4));
-    print(path_to_node(root, 4));
+    print(contains_value(root, 4))
+    print(path_to_node(root, 4))
 
-    print(max_depth(root));
-    print(lowest_common_ancestor(root, root.left.left, root.left).val);
-    print(is_balanced(root));
+    print(max_depth(root))
+    print(lowest_common_ancestor(root, root.left.left, root.left).val)
+    print(is_balanced(root))
 
+    root2 = TreeNode(3)
+    root2.left = TreeNode(2)
+    root2.left.left = TreeNode(4)
+    root2.left.left.right = TreeNode(5)
+    print(merge_trees(root, root2).val)
 
-    root2 = TreeNode(3);
-    root2.left = TreeNode(2);
-    root2.left.left = TreeNode(4);
-    root2.left.left.right = TreeNode(5);
-    print(merge_trees(root, root2).val);
+    print(invert_tree(root).left.val)
 
-    print(invert_tree(root).left.val);
-
-    print(diameter_of_binary_tree(root));
-    print(tree_to_list(root));
+    print(diameter_of_binary_tree(root))
+    print(tree_to_list(root))

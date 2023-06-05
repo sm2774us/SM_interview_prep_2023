@@ -30,13 +30,16 @@ the values in place
 Time Complexity: O(len(arr))
 Space Complexity: O(1)
 """
+
+
 def reverse_array(arr: List[int]):
     # We will iterate to the midpoint of the array. For each value, we can
     # get the index its supposed to swap with by computing arr.length-i-1
-    for i in range(len(arr)//2):
+    for i in range(len(arr) // 2):
         temp = arr[i]
-        arr[i] = arr[len(arr)-i-1]
-        arr[len(arr)-i-1] = temp
+        arr[i] = arr[len(arr) - i - 1]
+        arr[len(arr) - i - 1] = temp
+
 
 """
 Exercise 1.2: Write a function that takes in a string and removes every
@@ -45,6 +48,8 @@ even-indexed character
 Time Complexity: O(len(s))
 Space Complexity: O(len(s))
 """
+
+
 def remove_even(s: str) -> str:
     # Build the string as a list first and then join everything together
     result = []
@@ -53,7 +58,8 @@ def remove_even(s: str) -> str:
     for i in range(0, len(s), 2):
         result.append(s[i])
 
-    return ''.join(result)
+    return "".join(result)
+
 
 """
 Exercises 1.3: Zig Zag Conversion
@@ -62,9 +68,11 @@ Full Problem Definition: https://leetcode.com/problems/zigzag-conversion/
 Time Complexity: O(len(s))
 Space Complexity: O(len(s))
 """
+
+
 def zig_zag(s: str, num_rows: int) -> str:
     # Compute each row and then merge them at the end
-    rows = [ [] for _ in range(num_rows)]
+    rows = [[] for _ in range(num_rows)]
 
     # We have 2 actions. First we iterate down over each row, then we iterate
     # back up. Do one then the other
@@ -74,24 +82,25 @@ def zig_zag(s: str, num_rows: int) -> str:
         i = 0
         while i < len(rows) and idx < len(s):
             rows[i].append(s[idx])
-            idx = idx+1
-            i = i+1
+            idx = idx + 1
+            i = i + 1
 
         # Iterate back up from numRows-2 to 1. Make sure we go from numRows-2 to
         # 1 and not numRows-1 to 0 because otherwise we'll add 2 characters to
         # row 0 and 2 characters to row numRows-1
-        i = len(rows)-2
+        i = len(rows) - 2
         while i >= 1 and idx < len(s):
             rows[i].append(s[idx])
-            idx = idx+1
-            i = i-1
+            idx = idx + 1
+            i = i - 1
 
     # Combine everything together
     result = []
     for row in rows:
-        result.append(''.join(row))
+        result.append("".join(row))
 
-    return ''.join(result)
+    return "".join(result)
+
 
 """
 Exercise 1.4: Given a 2D matrix, write a function to print the values
@@ -100,6 +109,8 @@ going back and forth across each row
 Time Complexity: O(arr.length * arr[0].length)
 Space Complexity: O(1) [ If the problem asks only to print the values O(len(arr) * len(arr[0])), i.e, same as Time Complexity ]
 """
+
+
 def print_back_and_forth(arr: List[List[int]]) -> List[int]:
     result: List[int] = []
     # Iterate 2 rows at a time and go across and back
@@ -111,11 +122,12 @@ def print_back_and_forth(arr: List[List[int]]) -> List[int]:
 
         # If iterating across to the right was the last row, end, otherwise
         # iterate back across to the right
-        if i+1 < len(arr):
-            for j in range(len(arr[i+1])-1, -1, -1):
-                print(arr[i+1][j])
-                result.append(arr[i+1][j])
+        if i + 1 < len(arr):
+            for j in range(len(arr[i + 1]) - 1, -1, -1):
+                print(arr[i + 1][j])
+                result.append(arr[i + 1][j])
     return result
+
 
 """
 Exercise 1.5: Given a 2D matrix, write a function to print the values in
@@ -124,14 +136,16 @@ the matrix in a clockwise spiral from outside to inside
 Time Complexity: O(len(arr) * len(arr[0]))
 Space Complexity: O(1) [ If the problem asks only to print the values O(len(arr) * len(arr[0])), i.e, same as Time Complexity ]
 """
+
+
 def print_spiral(arr: List[List[int]]) -> List[int]:
     result: List[int] = []
     # We need to keep track of the boundaries of the current layer of the
     # spiral that we are traversing
     min_row = 0
     min_col = 0
-    max_row = len(arr)-1
-    max_col = len(arr[0])-1
+    max_row = len(arr) - 1
+    max_col = len(arr[0]) - 1
 
     # Once the mins and maxes converge, we are at the center of the spiral.
     # The spiral follows a fixed set of steps. We go left, down, right, up.
@@ -139,37 +153,38 @@ def print_spiral(arr: List[List[int]]) -> List[int]:
     # one explicitly.
     while True:
         # Go across the top
-        for col in range(min_col, max_col+1):
+        for col in range(min_col, max_col + 1):
             print(arr[min_row][col])
             result.append(arr[min_row][col])
         if min_row >= max_row:
             break
-        min_row = min_row+1
+        min_row = min_row + 1
 
         # Go down the right side
-        for row in range(min_row, max_row+1):
+        for row in range(min_row, max_row + 1):
             print(arr[row][max_col])
             result.append(arr[row][max_col])
         if min_col >= max_col:
             break
-        max_col = max_col-1
+        max_col = max_col - 1
 
         # Go across the bottom
-        for col in range(max_col, min_col-1, -1):
+        for col in range(max_col, min_col - 1, -1):
             print(arr[max_row][col])
             result.append(arr[max_row][col])
         if min_row >= max_row:
             break
-        max_row = max_row-1
+        max_row = max_row - 1
 
         # Go up the left side
-        for row in range(max_row, min_row-1, -1):
+        for row in range(max_row, min_row - 1, -1):
             print(arr[row][min_col])
             result.append(arr[row][min_col])
         if min_col >= max_col:
             break
-        min_col = min_col+1
+        min_col = min_col + 1
     return result
+
 
 """
 Exercise 1.6: Given a 2D matrix, write a function to print the values in the
@@ -178,6 +193,8 @@ matrix in a zig-zag order
 Time Complexity: O(len(arr) * len(arr[0]))
 Space Complexity: O(1) [ If the problem asks only to print the values O(len(arr) * len(arr[0])), i.e, same as Time Complexity ]
 """
+
+
 def print_diagonals(arr: List[List[int]]) -> List[int]:
     result: List[int] = []
     row = 0
@@ -189,49 +206,50 @@ def print_diagonals(arr: List[List[int]]) -> List[int]:
     # and the other
     while True:
         # Go up to the right
-        while row > 0 and col < len(arr[0])-1:
+        while row > 0 and col < len(arr[0]) - 1:
             print(arr[row][col])
             result.append(arr[row][col])
-            row = row-1
-            col = col+1
+            row = row - 1
+            col = col + 1
 
         # Without this we won't print the final value in the diagonal
         print(arr[row][col])
         result.append(arr[row][col])
 
         # Check whether we're at the botom right corner
-        if row == len(arr)-1 and col == len(arr[0])-1:
+        if row == len(arr) - 1 and col == len(arr[0]) - 1:
             break
 
         # We need to update our positiion differently depending on whether
         # we're still going along the top of the matrix or down the
         # righthand side
-        elif col+1 < len(arr[0]):
-            col = col+1
+        elif col + 1 < len(arr[0]):
+            col = col + 1
         else:
-            row = row+1
+            row = row + 1
 
         # Go down to the left
-        while row < len(arr)-1 and col > 0:
+        while row < len(arr) - 1 and col > 0:
             print(arr[row][col])
             result.append(arr[row][col])
-            row = row+1
-            col = col-1
+            row = row + 1
+            col = col - 1
 
         # Without this we won't print the final value in the diagonal
         print(arr[row][col])
         result.append(arr[row][col])
 
         # Check whether we're at the botom right corner
-        if row == len(arr)-1 and col == len(arr[0])-1:
+        if row == len(arr) - 1 and col == len(arr[0]) - 1:
             break
 
         # Are we going along the lefthand side or the bottom?
-        elif row+1 < len(arr):
-            row = row+1
+        elif row + 1 < len(arr):
+            row = row + 1
         else:
-            col = col+1
+            col = col + 1
     return result
+
 
 """
 Exercise 2.1: Given a string, print out all of the substrings
@@ -239,13 +257,16 @@ Exercise 2.1: Given a string, print out all of the substrings
 Time Complexity: O(len(s)!) [ i.e., O(N!) similar to "Generate all the permutations of a list" problem ]
 Space Complexity: O(1) [ If the problem asks only to print the values O(len(s)!), i.e, same as Time Complexity ]
 """
+
+
 def print_substrings(s: str):
     result: List[int] = []
     for i in range(len(s)):
-        for j in range(i+1, len(s)+1):
+        for j in range(i + 1, len(s) + 1):
             print(s[i:j])
-            result.append(s[i:j])            
+            result.append(s[i:j])
     return result
+
 
 """
 Exercise 2.2: Write a function to find all duplicates in an array. The array
@@ -254,12 +275,15 @@ will contain exactly 1 duplicated value
 Time Complexity: O(len(arr)^2)
 Space Complexity: O(1)
 """
+
+
 def find_duplicates(arr: List[int]) -> int:
     # Use 2 pointers to compare each pair of values
     for i in range(len(arr)):
-        for j in range(i+1, len(arr)):
+        for j in range(i + 1, len(arr)):
             if arr[i] == arr[j]:
                 return arr[i]
+
 
 """
 Exercise 2.3: Given a sorted array, find every pair of values in the
@@ -268,38 +292,41 @@ array that sum up to a given target
 Time Complexity: O(len(arr))
 Space Complexity: O(1)
 """
+
+
 def two_sum(arr: List[int], target: int) -> List[List[int]]:
     result = []
 
     # We start our pointers at the beginning and move towards the center
     i = 0
-    j = len(arr)-1
+    j = len(arr) - 1
 
     while i < j:
         sum = arr[i] + arr[j]
         # If we found the target, we add it to the result. Then we either
         # increment i or decrement j. It doesn't matter which we do
         if sum == target:
-            result.append([arr[i],arr[j]])
+            result.append([arr[i], arr[j]])
 
             # We want to avoid including the same pair multiple times so we
             # skip the pointer ahead to the next unique value. Since our
             # array is sorted, we just keep incrementing until we see a
             # new value
-            while arr[i] == arr[i+1]:
-                i = i+1
-            i = i+1
+            while arr[i] == arr[i + 1]:
+                i = i + 1
+            i = i + 1
 
         # We can find a larger sum by incrementing i. This makes the smaller
         # value in our pair larger so the sum is larger
         if sum < target:
-            i = i+1
+            i = i + 1
 
         # If it's too big, we do the opposite by decrementing j
         if sum > target:
-            j = j-1
+            j = j - 1
 
     return result
+
 
 """
 Exercise 3.1: Given two arrays, compare them to see if they are equal
@@ -307,6 +334,8 @@ Exercise 3.1: Given two arrays, compare them to see if they are equal
 Time Complexity: O(len(arr1))
 Space Complexity: O(1)
 """
+
+
 def arrays_are_equal(arr1: List[int], arr2: List[int]) -> bool:
     # If they're not the same length they can't be equal
     if len(arr1) != len(arr2):
@@ -319,6 +348,7 @@ def arrays_are_equal(arr1: List[int], arr2: List[int]) -> bool:
 
     return True
 
+
 """
 Exercise 3.2: Given two strings, determine if one string is the reverse of the
 other string
@@ -326,6 +356,8 @@ other string
 Time Complexity: O(len(s1))
 Space Complexity: O(1)
 """
+
+
 def strings_are_opposite(s1: str, s2: str) -> bool:
     # If they're not the same length they can't be opposites
     if len(s1) != len(s2):
@@ -335,10 +367,11 @@ def strings_are_opposite(s1: str, s2: str) -> bool:
     # reverse one of the strings and compare them, but that takes extra
     # space whereas this does not
     for i in range(len(s1)):
-        if s1[i] != s2[len(s2)-i-1]:
+        if s1[i] != s2[len(s2) - i - 1]:
             return False
 
     return True
+
 
 """
 Exercise 3.3: Given two strings, determine whether they are anagrams of
@@ -347,6 +380,8 @@ each other
 Time Complexity: O(len(s1))
 Space Complexity: O(len(s1))
 """
+
+
 def are_anagrams(s1: str, s2: str) -> bool:
     # If they're not the same length they can't be anagrams
     if len(s1) != len(s2):
@@ -365,11 +400,12 @@ def are_anagrams(s1: str, s2: str) -> bool:
             return False
 
         # s1 contains fewer occurrences of c than s2
-        chars[c] = chars[c]-1
+        chars[c] = chars[c] - 1
         if chars[c] < 0:
             return False
 
     return True
+
 
 """
 Exercise 4.1: Given an array, compute the sum of each length-k subarray
@@ -377,6 +413,8 @@ Exercise 4.1: Given an array, compute the sum of each length-k subarray
 Time Complexity: O(len(arr))
 Space Complexity: O(1)
 """
+
+
 def subarray_sums(arr: List[int], k: int) -> List[int]:
     result = []
 
@@ -390,11 +428,11 @@ def subarray_sums(arr: List[int], k: int) -> List[int]:
     # Use a sliding window to go through the remainder of the array without
     # recomputing the sum for every subarray
     left = 0
-    right = k-1
-    while right < len(arr)-1:
+    right = k - 1
+    while right < len(arr) - 1:
         # The value at right+1 needs to be added to the sum and the value
         # at left needs to be subtracted
-        right = right+1
+        right = right + 1
         sum = sum + arr[right]
         sum = sum - arr[left]
         left = left + 1
@@ -403,6 +441,7 @@ def subarray_sums(arr: List[int], k: int) -> List[int]:
 
     return result
 
+
 """
 Exercise 4.2: Given a string, find the longest substring of the string that does
 not contain any repeated characters
@@ -410,6 +449,8 @@ not contain any repeated characters
 Time Complexity: O(len(s))
 Space Complexity: O(1)
 """
+
+
 def no_repeated_chars(s: str) -> int:
     # Track the characters in our current substring
     in_substring = set()
@@ -429,14 +470,15 @@ def no_repeated_chars(s: str) -> int:
             left = left + 1
 
         # We have a valid substring so is it the longest one?
-        max_substring = max(max_substring, right-left+1)
+        max_substring = max(max_substring, right - left + 1)
 
         # Try expanding the substring again
         in_substring.add(s[right])
 
-        right = right+1
+        right = right + 1
 
     return max_substring
+
 
 """
 Exercise 4.3: Given two strings, s and p, find all occurrences of anagrams of p
@@ -445,13 +487,15 @@ in s. The output is the starting index of each anagram
 Time Complexity: O(len(s))
 Space Complexity: O(1)
 """
+
+
 def find_all_anagrams(s: str, p: str) -> List[int]:
     result = []
 
     # This is another option for computing character counts instead of a dict
     # since we know they're lowercase English chars. This is a little easier
     # given the approach below than using a dict
-    chars = [0]*256
+    chars = [0] * 256
     for c in p:
         chars[ord(c)] = chars[ord(c)] + 1
 
@@ -474,10 +518,11 @@ def find_all_anagrams(s: str, p: str) -> List[int]:
 
         # If we have the exact right number of occurrences of the character AND
         # the substring is the right length, then this is a valid substring
-        if chars[right_char_ord] == 0 and right-left == len(p):
+        if chars[right_char_ord] == 0 and right - left == len(p):
             result.append(left)
 
     return result
+
 
 """
 Exercise 4.4: Given two strings, s and p, find the smallest substring of s that
@@ -486,9 +531,11 @@ contains all the characters in p
 Time Complexity: O(len(s))
 Space Complexity: O(1)
 """
+
+
 def smallest_substring(s: str, p: str) -> str:
     # Same as 4.3, we use an array to store character count
-    chars = [0]*256
+    chars = [0] * 256
     for c in p:
         chars[ord(c)] = chars[ord(c)] + 1
 
@@ -500,7 +547,7 @@ def smallest_substring(s: str, p: str) -> str:
     # our substring. The count allows us to quickly see whether our substring
     # includes all the characters in p or not
     count = 0
-    min_length = float('inf')
+    min_length = float("inf")
     min_start = 0
 
     while right < len(s):
@@ -531,116 +578,117 @@ def smallest_substring(s: str, p: str) -> str:
             left = left + 1
 
     # If we don't find a valid substring, return ""
-    if (min_length > len(s)):
+    if min_length > len(s):
         return ""
 
     return s[min_start : min_start + min_length]
 
+
 def main():
-    l = [1,2,3,4]
-    print('--------------------------------------------------------------------------------------------------')
-    print('reverse_array([1,2,3,4])')
-    print('--------------------------------------------------------------------------------------------------')
+    l = [1, 2, 3, 4]
+    print("--------------------------------------------------------------------------------------------------")
+    print("reverse_array([1,2,3,4])")
+    print("--------------------------------------------------------------------------------------------------")
     reverse_array(l)
     print(l)
-    print('--------------------------------------------------------------------------------------------------')
-    
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+
+    print("--------------------------------------------------------------------------------------------------")
     print('remove_even("abcdef")')
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
     print(remove_even("abcdef"))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
     print('zig_zag("PAYPALISHIRING", 3)')
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
     print(zig_zag("PAYPALISHIRING", 3))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    matrix = [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]]
-    print('--------------------------------------------------------------------------------------------------')
-    print('print_back_and_forth([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]])')
-    print('--------------------------------------------------------------------------------------------------')
+    matrix = [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15], [16, 17, 18, 19, 20]]
+    print("--------------------------------------------------------------------------------------------------")
+    print("print_back_and_forth([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]])")
+    print("--------------------------------------------------------------------------------------------------")
     print_back_and_forth(matrix)
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('print_spiral([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]])')
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print("print_spiral([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]])")
+    print("--------------------------------------------------------------------------------------------------")
     print_spiral(matrix)
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('print_diagonals([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]])')
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print("print_diagonals([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]])")
+    print("--------------------------------------------------------------------------------------------------")
     print_diagonals(matrix)
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('print_substrings([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]])')
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print("print_substrings([[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16, 17,18,19,20]])")
+    print("--------------------------------------------------------------------------------------------------")
     print_substrings("abcde")
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('find_duplicates([1,2,3,4,3,5])')
-    print('--------------------------------------------------------------------------------------------------')
-    print(find_duplicates([1,2,3,4,3,5]))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print("find_duplicates([1,2,3,4,3,5])")
+    print("--------------------------------------------------------------------------------------------------")
+    print(find_duplicates([1, 2, 3, 4, 3, 5]))
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('two_sum([1,2,2,2,3,4,5,6,6,6], 8)')
-    print('--------------------------------------------------------------------------------------------------')
-    print(two_sum([1,2,2,2,3,4,5,6,6,6], 8))
-    print('')
-    print('two_sum([1,3,3,3,5], 6)')
-    print('--------------------------------------------------------------------------------------------------')
-    print(two_sum([1,3,3,3,5], 6))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print("two_sum([1,2,2,2,3,4,5,6,6,6], 8)")
+    print("--------------------------------------------------------------------------------------------------")
+    print(two_sum([1, 2, 2, 2, 3, 4, 5, 6, 6, 6], 8))
+    print("")
+    print("two_sum([1,3,3,3,5], 6)")
+    print("--------------------------------------------------------------------------------------------------")
+    print(two_sum([1, 3, 3, 3, 5], 6))
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('arrays_are_equal([1,2,3,4], [1,2,3,4])')
-    print('--------------------------------------------------------------------------------------------------')
-    print(arrays_are_equal([1,2,3,4], [1,2,3,4]))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print("arrays_are_equal([1,2,3,4], [1,2,3,4])")
+    print("--------------------------------------------------------------------------------------------------")
+    print(arrays_are_equal([1, 2, 3, 4], [1, 2, 3, 4]))
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
     print('are_anagrams("abcd", "cdab")')
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
     print(strings_are_opposite("abcd", "dcba"))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('are_anagrams("abcd", "cdab")')    
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print('are_anagrams("abcd", "cdab")')
+    print("--------------------------------------------------------------------------------------------------")
     print(are_anagrams("abcd", "cdab"))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('subarray_sums([1,2,3,4,5], 3)')    
-    print('--------------------------------------------------------------------------------------------------')
-    print(subarray_sums([1,2,3,4,5], 3))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print("subarray_sums([1,2,3,4,5], 3)")
+    print("--------------------------------------------------------------------------------------------------")
+    print(subarray_sums([1, 2, 3, 4, 5], 3))
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('no_repeated_chars("abcdbea")')    
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print('no_repeated_chars("abcdbea")')
+    print("--------------------------------------------------------------------------------------------------")
     print(no_repeated_chars("abcdbea"))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('find_all_anagrams("cbaebabacd", "abc")')    
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print('find_all_anagrams("cbaebabacd", "abc")')
+    print("--------------------------------------------------------------------------------------------------")
     print(find_all_anagrams("cbaebabacd", "abc"))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
-    print('--------------------------------------------------------------------------------------------------')
-    print('smallest_substring("aabbccdd", "abc")')    
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
+    print('smallest_substring("aabbccdd", "abc")')
+    print("--------------------------------------------------------------------------------------------------")
     print(smallest_substring("aabbccdd", "abc"))
-    print('--------------------------------------------------------------------------------------------------')
+    print("--------------------------------------------------------------------------------------------------")
 
 
 # Sample test cases
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

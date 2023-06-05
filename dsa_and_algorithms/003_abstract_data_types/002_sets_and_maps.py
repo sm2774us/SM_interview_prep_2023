@@ -13,11 +13,14 @@ from typing import List
 """
 Exercise 1.1: Implement a HashSet
 """
+
+
 class MyHashSet:
 
     """
     Constructor
     """
+
     def __init__(self, capacity: int):
         self._data = []
         for i in range(capacity):
@@ -31,6 +34,7 @@ class MyHashSet:
     Time Complexity: O(size(set) + len(val))
     Space Complexity: O(1)
     """
+
     def add(self, val: str):
         # Find the bucket index
         idx = hash(val) % len(self._data)
@@ -38,7 +42,7 @@ class MyHashSet:
         # If the value isn't in the bucket, add it to the bucket
         if not val in self._data[idx]:
             self._data[idx].append(val)
-            self._size = self._size+1
+            self._size = self._size + 1
 
     """
     Does the set contain val?
@@ -46,6 +50,7 @@ class MyHashSet:
     Time Complexity: O(size(set) + len(val))
     Space Complexity: O(1)
     """
+
     def contains(self, val: str) -> bool:
         # Find the bucket and see if it contains the desired value
         idx = hash(val) % len(self._data)
@@ -57,13 +62,14 @@ class MyHashSet:
     Time Complexity: O(size(set) + len(val))
     Space Complexity: O(1)
     """
+
     def remove(self, val: str):
         # Find the bucket index
         idx = hash(val) % len(self._data)
 
         if val in self._data[idx]:
             self._data[idx].remove(val)
-            self._size = self._size-1
+            self._size = self._size - 1
 
     """
     Convert the set into a list
@@ -71,6 +77,7 @@ class MyHashSet:
     Time Complexity: O(n * average value length)
     Space Complexity: O(1)
     """
+
     def toList(self):
         return [item for sublist in self._data for item in sublist]
 
@@ -83,6 +90,7 @@ class MyHashSet:
     Time Complexity: O(capacity + size(set) * average value length)
     Space Complexity: O(1)
     """
+
     def resize(self, new_capacity: int):
         # Create new backing list
         new_data = []
@@ -98,14 +106,18 @@ class MyHashSet:
 
         self._data = new_data
 
+
 """
 Exercise 1.2: Implement a HashMap
 """
+
+
 class MyHashMap:
 
     """
     Constructor
     """
+
     def __init__(self, capacity: int):
         self._data = []
         for i in range(capacity):
@@ -120,6 +132,7 @@ class MyHashMap:
     Time Complexity: O(size(map) + len(key))
     Space Complexity: O(1)
     """
+
     def put(self, key: str, val: str):
         # Find the bucket index
         idx = hash(key) % len(self._data)
@@ -133,7 +146,7 @@ class MyHashMap:
 
         # The key is not in the map, so add the key/value pair
         self._data[idx].append((key, val))
-        self._size = self._size+1
+        self._size = self._size + 1
 
     """
     Get the value in the map for the corresponding key
@@ -141,6 +154,7 @@ class MyHashMap:
     Time Complexity: O(size(map) + len(key))
     Space Complexity: O(1)
     """
+
     def get(self, key: str) -> str:
         # Find the bucket index
         idx = hash(key) % len(self._data)
@@ -159,6 +173,7 @@ class MyHashMap:
     Time Complexity: O(size(map) + len(key))
     Space Complexity: O(1)
     """
+
     def contains_key(self, key: str) -> bool:
         # Find the bucket index
         idx = hash(key) % len(self._data)
@@ -176,6 +191,7 @@ class MyHashMap:
     Time Complexity: O(size(map) + len(key))
     Space Complexity: O(1)
     """
+
     def remove(self, key: str):
         # Find the bucket index
         idx = hash(key) % len(self._data)
@@ -183,7 +199,7 @@ class MyHashMap:
         for i in range(len(self._data[idx])):
             if self._data[idx][i][0] == key:
                 self._data[idx].pop(i)
-                self._size = self._size-1
+                self._size = self._size - 1
                 return
 
     """
@@ -192,6 +208,7 @@ class MyHashMap:
     Time Complexity: O(capacity + size(map) * average value length)
     Space Complexity: O(1)
     """
+
     def resize(self, new_capacity: int):
         # Create new backing list
         new_data = []
@@ -207,12 +224,15 @@ class MyHashMap:
 
         self._data = new_data
 
+
 """
 Exercise 1.3: Flatten a dictionary
 
 Time Complexity: O(items in dict)
 Space Complexity: O(depth of nested items)
 """
+
+
 def flatten_dictionary(my_dict: dict) -> dict:
     result = {}
 
@@ -220,6 +240,7 @@ def flatten_dictionary(my_dict: dict) -> dict:
     # key-path to that level so that we can prepend it
     flatten_dictionary_inner(my_dict, result, "")
     return result
+
 
 def flatten_dictionary_inner(my_dict: dict, result: dict, path: str):
     # Add the . here so we don't have to worry about cases where path is
@@ -240,8 +261,9 @@ def flatten_dictionary_inner(my_dict: dict, result: dict, path: str):
             # If it's a dict, recurse
             flatten_dictionary_inner(value, result, path + k)
 
+
 # Test Cases
-if __name__ == '__main__':
+if __name__ == "__main__":
     s = MyHashSet(10)
     s.add("abc")
     s.add("bcd")
@@ -254,10 +276,10 @@ if __name__ == '__main__':
     print(s.toList())
 
     m = MyHashMap(10)
-    m.put("abc","bcd")
-    m.put("123","234")
-    m.put("xyz","abc")
-    m.put("abc","xyz")
+    m.put("abc", "bcd")
+    m.put("123", "234")
+    m.put("xyz", "abc")
+    m.put("abc", "xyz")
     print(m.contains_key("abc"))
     print(m.get("abc"))
     m.remove("abc")
@@ -267,14 +289,4 @@ if __name__ == '__main__':
     print(m.contains_key("xyz"))
     print(m.get("xyz"))
 
-    print(flatten_dictionary({
-        "Key1" : "1",
-        "Key2" : {
-            "a" : "2",
-            "b" : "3",
-            "c" : {
-                "d" : {"x":{"y": "10"}},
-                "e" : "1"
-            }
-        }
-    }))
+    print(flatten_dictionary({"Key1": "1", "Key2": {"a": "2", "b": "3", "c": {"d": {"x": {"y": "10"}}, "e": "1"}}}))

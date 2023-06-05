@@ -15,11 +15,14 @@ from typing import List
 """
 Exercise 1.1: Implement a Stack of integers using a Linked List
 """
+
+
 class MyStack:
 
     """
     A simple singly-linked node class
     """
+
     class _Node:
         def __init__(self, n: int):
             self.val = n
@@ -28,6 +31,7 @@ class MyStack:
     """
     Constructor
     """
+
     def __init__(self):
         self._head = None
         self._size = 0
@@ -38,12 +42,13 @@ class MyStack:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def push(self, val: int):
         # Add the new value to the front of the Linked List
         new_node = MyStack._Node(val)
         new_node.next = self._head
         self._head = new_node
-        self._size = self._size+1
+        self._size = self._size + 1
 
     """
     Remove an item from the top of the stack
@@ -51,6 +56,7 @@ class MyStack:
     Time Complexity: O(1)
     Space Complextiy: O(1)
     """
+
     def pop(self) -> int:
         if self._size == 0:
             raise IndexError()
@@ -58,7 +64,7 @@ class MyStack:
         # Remove the first item from the Linked List
         curr = self._head
         self._head = self._head.next
-        self._size = self._size-1
+        self._size = self._size - 1
 
         return curr.val
 
@@ -68,17 +74,22 @@ class MyStack:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def size(self) -> int:
         return self._size
+
 
 """
 Exercise 1.2: Implement a Queue of integers using a Linked List
 """
+
+
 class MyQueue:
 
     """
     A simple doubly-linked node class
     """
+
     class _Node:
         def __init__(self, n: int):
             self.val = n
@@ -88,6 +99,7 @@ class MyQueue:
     """
     Constructor
     """
+
     def __init__(self):
         self._head = None
         self._tail = None
@@ -99,6 +111,7 @@ class MyQueue:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def enqueue(self, val: int):
         new_node = MyQueue._Node(val)
 
@@ -119,6 +132,7 @@ class MyQueue:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def dequeue(self) -> int:
         if self._size == 0:
             raise IndexError()
@@ -142,8 +156,10 @@ class MyQueue:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def size(self) -> int:
         return self._size
+
 
 """
 Exercise 1.3: Given a stack, find the nth element in the stack
@@ -151,6 +167,8 @@ Exercise 1.3: Given a stack, find the nth element in the stack
 Time Complexity: O(n)
 Space Complexity: O(n)
 """
+
+
 def nth_element_in_stack(stack: List[int], n: int) -> int:
     if n > len(stack):
         raise IndexError()
@@ -168,14 +186,18 @@ def nth_element_in_stack(stack: List[int], n: int) -> int:
 
     return result
 
+
 """
 Exercise 1.4: Implement a Stack using Queues
 """
+
+
 class StackFromQueues:
 
     """
     Constructor
     """
+
     def __init__(self):
         self._data = queue.Queue()
 
@@ -185,6 +207,7 @@ class StackFromQueues:
     Time Complexity: O(n)
     Space Complexity: O(1)
     """
+
     def push(self, x: int) -> None:
         # We need to insert the value as the first item in the queue. We
         # can do that by copying everything into a new queue
@@ -195,10 +218,10 @@ class StackFromQueues:
 
         # Add everything else behind it in the queue
         while not self._data.empty():
-            new_data.put(self._data.get());
+            new_data.put(self._data.get())
 
         # Update our data to point to the new queue
-        self._data = new_data;
+        self._data = new_data
 
     """
     Pop an item from the stack
@@ -206,6 +229,7 @@ class StackFromQueues:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def pop(self) -> int:
         return self._data.get()
 
@@ -215,11 +239,13 @@ class StackFromQueues:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def top(self) -> int:
         return self._data.queue[0]
 
     def empty(self) -> bool:
         return self._data.empty()
+
 
 """
 Exercise 2.1: Valid Parentheses
@@ -227,13 +253,11 @@ Exercise 2.1: Valid Parentheses
 Time Complexity: O(n)
 Space Complexity: O(n)
 """
+
+
 def valid_parentheses(s: str) -> bool:
     #  We need to know which open parens match which close parens
-    matching_parens = {
-        '(': ')',
-        '[': ']',
-        '{': '}'
-    }
+    matching_parens = {"(": ")", "[": "]", "{": "}"}
 
     # Use a stack to keep track of all the open parens
     open_parens = []
@@ -242,17 +266,18 @@ def valid_parentheses(s: str) -> bool:
     # for the string to be valid, the char needs to be the matching paren
     # for the top char on the stack
     for c in s:
-        if c == '(' or c == '[' or c == '{':
-            open_parens.append(c);
+        if c == "(" or c == "[" or c == "{":
+            open_parens.append(c)
         elif len(open_parens) == 0:
             # If the stack is empty, then there are too many close parens
             return False
         else:
-            open = open_parens.pop();
+            open = open_parens.pop()
             if matching_parens[open] != c:
                 return False
 
     return len(open_parens) == 0
+
 
 """
 Exercise 2.2: Basic Calculator
@@ -260,6 +285,8 @@ Exercise 2.2: Basic Calculator
 Time Complexity: O(n)
 Space Complexity: O(n)
 """
+
+
 def basic_calculator(s: str) -> int:
     calc = []
 
@@ -277,10 +304,10 @@ def basic_calculator(s: str) -> int:
         if curr.isdigit():
             # Get the full number. It can be more than 1 digit
             end_of_number = i
-            while end_of_number+1 < len(s) and s[end_of_number+1].isdigit():
+            while end_of_number + 1 < len(s) and s[end_of_number + 1].isdigit():
                 end_of_number = end_of_number + 1
 
-            number = int(s[i: end_of_number+1])
+            number = int(s[i : end_of_number + 1])
 
             # Sign tells us whether to add or subtract the current number
             sum = sum + number * sign
@@ -289,34 +316,35 @@ def basic_calculator(s: str) -> int:
             i = end_of_number
 
         # If we see a +/-, update the sign accordingly
-        if curr == '+':
+        if curr == "+":
             sign = 1
 
-        if curr == '-':
+        if curr == "-":
             sign = -1
 
         # If we see an open paren, we just save our current sum and sign
         # and then start a new computation. We essentially compute the inner
         # sum first, and then pop the sum from before from our stack to
         # combine them together
-        if curr == '(':
+        if curr == "(":
             calc.append((sum, sign))
             sum = 0
             sign = 1
 
         # If we find a close paren, we combine our current sum with the
         # previous sum from outside the parens
-        if curr == ')':
+        if curr == ")":
             prev_state = calc.pop()
-            sign = prev_state[1];
-            sum = prev_state[0] + sum * sign;
+            sign = prev_state[1]
+            sum = prev_state[0] + sum * sign
 
-        i = i+1
+        i = i + 1
 
     return sum
 
+
 # Test Cases
-if __name__ == '__main__':
+if __name__ == "__main__":
     s = MyStack()
     s.push(1)
     s.push(2)
@@ -326,7 +354,6 @@ if __name__ == '__main__':
     print(s.pop())
     print(s.pop())
     print(s.size())
-
 
     q = MyQueue()
     q.enqueue(1)
@@ -338,19 +365,18 @@ if __name__ == '__main__':
     print(q.dequeue())
     print(q.size())
 
+    stack = [1, 2, 3, 4, 5]
+    print(nth_element_in_stack(stack, 2))
 
-    stack = [1,2,3,4,5];
-    print(nth_element_in_stack(stack, 2));
+    sfq = StackFromQueues()
+    sfq.push(1)
+    sfq.push(2)
+    sfq.push(3)
+    print(sfq.pop())
+    print(sfq.top())
 
-    sfq = StackFromQueues();
-    sfq.push(1);
-    sfq.push(2);
-    sfq.push(3);
-    print(sfq.pop());
-    print(sfq.top());
+    print(valid_parentheses("([]{}(()))"))
+    print(valid_parentheses("(]"))
 
-    print(valid_parentheses("([]{}(()))"));
-    print(valid_parentheses("(]"));
-
-    print(basic_calculator("1 + 1"));
-    print(basic_calculator("12 - (2 + 3) + 4"));
+    print(basic_calculator("1 + 1"))
+    print(basic_calculator("12 - (2 + 3) + 4"))

@@ -8,8 +8,8 @@ recommend you complete them before reviewing the solutions here.
 Execution: python graph_solutions.py
 """
 
-from copy import deepcopy
 import queue
+from copy import deepcopy
 from typing import List
 
 """
@@ -37,11 +37,14 @@ Adjacecny List:
 Exercise 1.2: Implement two classes to represent a graph as an Adjacency Matrix
 and an Adjacency List
 """
+
+
 class AdjacencyMatrix:
 
     """
     Constructor
     """
+
     def __init__(self, n: int):
         self.matrix = [[0 for i in range(n)] for j in range(n)]
 
@@ -51,6 +54,7 @@ class AdjacencyMatrix:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def add_edge(self, node1: int, node2: int):
         if node1 < 0 or node1 >= len(self.matrix) or node2 < 0 or node2 >= len(self.matrix):
             raise IndexError()
@@ -64,6 +68,7 @@ class AdjacencyMatrix:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def remove_edge(self, node1: int, node2: int):
         if node1 < 0 or node1 >= len(self.matrix) or node2 < 0 or node2 >= len(self.matrix):
             raise IndexError()
@@ -77,6 +82,7 @@ class AdjacencyMatrix:
     Time Complexity: O(n)
     Space Complexity: O(1)
     """
+
     def neighbors(self, node: int) -> List[int]:
         if node < 0 or node >= len(self.matrix):
             raise IndexError()
@@ -84,16 +90,18 @@ class AdjacencyMatrix:
         # Iterate over the matrix and collect all the neighbors
         result = []
         for i in range(len(self.matrix)):
-            if (self.matrix[node][i]):
+            if self.matrix[node][i]:
                 result.append(i)
 
         return result
+
 
 class AdjacencyList:
 
     """
     Constructor
     """
+
     def __init__(self, n: int):
         self.edges = [set() for _ in range(n)]
 
@@ -103,6 +111,7 @@ class AdjacencyList:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def add_edge(self, node1: int, node2: int):
         if node1 < 0 or node1 >= len(self.edges) or node2 < 0 or node2 >= len(self.edges):
             raise IndexError()
@@ -116,6 +125,7 @@ class AdjacencyList:
     Time Complexity: O(1)
     Space Complexity: O(1)
     """
+
     def remove_edge(self, node1: int, node2: int):
         if node1 < 0 or node1 >= len(self.edges) or node2 < 0 or node2 >= len(self.edges):
             raise IndexError()
@@ -129,11 +139,13 @@ class AdjacencyList:
     Time Complexity: O(n)
     Space Complexity: O(1)
     """
+
     def neighbors(self, node: int) -> List[int]:
         if node < 0 or node >= len(self.edges):
             raise IndexError()
 
         return list(self.edges[node])
+
 
 """
 Exercise 1.3: Implement a function to convert an adjacency matrix into an
@@ -146,6 +158,8 @@ Convert an adjacency matrix into an adjacency list
 Time Complexity: O(n^2)
 Space Complexity: O(1)
 """
+
+
 def adjacency_matrix_to_list(matrix: List[List[bool]]) -> List[set]:
     list = []
 
@@ -160,12 +174,15 @@ def adjacency_matrix_to_list(matrix: List[List[bool]]) -> List[set]:
 
     return list
 
+
 """
 Convert an adjacency list into an adjacency matrix
 
 Time Complexity: O(n^2)
 Space Complexity: O(1)
 """
+
+
 def adjacency_list_to_matrix(list: List[set]) -> List[List[bool]]:
     matrix = []
 
@@ -182,15 +199,18 @@ def adjacency_list_to_matrix(list: List[set]) -> List[List[bool]]:
 
     return matrix
 
+
 """
 Exercise 1.4: Write a function to clone a graph
 """
 
+
 # Node class from Leetcode: https://leetcode.com/problems/clone-graph/
 class Node:
-    def __init__(self, val = 0, neighbors = None):
+    def __init__(self, val=0, neighbors=None):
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
+
 
 """
 Make a deep copy of the graph
@@ -198,6 +218,8 @@ Make a deep copy of the graph
 Time Complexity: O(V+E)
 Space Complexity: O(V)
 """
+
+
 def clone_graph(node: Node) -> Node:
     if not node:
         return None
@@ -225,9 +247,12 @@ def clone_graph(node: Node) -> Node:
 
     return nodes[node]
 
+
 """
 Traverse our graph using DFS and add nodes/copies of nodes to nodes
 """
+
+
 def _traverse_all_nodes(node: Node, nodes: dict):
     # We've already visited this node
     if node in nodes:
@@ -240,6 +265,7 @@ def _traverse_all_nodes(node: Node, nodes: dict):
     for neighbor in node.neighbors:
         _traverse_all_nodes(neighbor, nodes)
 
+
 """
 Exercise 2.1: Write a function to determine whether a path exists between
 two nodes
@@ -251,6 +277,8 @@ Implement using an adjacency list
 Time Complexity: O(V + E)
 Space Complexity: O(V)
 """
+
+
 def valid_path_list(n: int, edges: List[List[int]], start: int, end: int, visited: set = set()) -> bool:
     # If we've found the target node, there is a valid path
     if start == end:
@@ -266,11 +294,12 @@ def valid_path_list(n: int, edges: List[List[int]], start: int, end: int, visite
     # Traverse every edge to the next node and see if any neighbor connects
     # to the target node
     for edge in edges[start]:
-        if (valid_path_list(n, edges, edge, end, visited)):
+        if valid_path_list(n, edges, edge, end, visited):
             return True
 
     # If we don't find a valid path, there is no valid path from this node
     return False
+
 
 """
 Implement using an adjacency matrix
@@ -278,6 +307,8 @@ Implement using an adjacency matrix
 Time Complexity: O(V^2)
 Space Complexity: O(V)
 """
+
+
 def valid_path_matrix(n: int, edges: List[List[bool]], start: int, end: int, visited: set = set()) -> bool:
     # If we've found the target node, there is a valid path
     if start == end:
@@ -294,12 +325,13 @@ def valid_path_matrix(n: int, edges: List[List[bool]], start: int, end: int, vis
     # to the target node
     for i in range(len(edges[start])):
         # We have to traverse all the possible edges to see which exist
-        if (edges[start][i]):
-            if (valid_path_list(n, edges, i, end, visited)):
+        if edges[start][i]:
+            if valid_path_list(n, edges, i, end, visited):
                 return True
 
     # If we don't find a valid path, there is no valid path from this node
     return False
+
 
 """
 Exercise 2.2: Write a function to find the length of the shortest path between
@@ -308,6 +340,8 @@ two nodes (use BFS)
 Time Complexity: O(V + E)
 Space Complexity: O(V)
 """
+
+
 def length_of_shortest_path(edges: List[List[int]], start: int, end: int) -> int:
     # For BFS, we use a queue
     to_visit = queue.Queue()
@@ -340,6 +374,7 @@ def length_of_shortest_path(edges: List[List[int]], start: int, end: int) -> int
 
     return -1
 
+
 """
 Exercise 2.3: Write a function to find the shortest path between two nodes
 (use BFS)
@@ -347,6 +382,8 @@ Exercise 2.3: Write a function to find the shortest path between two nodes
 Time Complexity: O(V + E)
 Space Complexity: O(V)
 """
+
+
 def shortest_path(edges: List[List[int]], start: int, end: int):
     # For BFS, we use a queue to store the next nodes to visit
     to_visit = queue.Queue()
@@ -397,12 +434,15 @@ def shortest_path(edges: List[List[int]], start: int, end: int):
     result.reverse()
     return result
 
+
 """
 Exercise 2.4: Write a function to find ALL the paths between two nodes
 
 Time Complexity: O(V!)
 Space Complexity: O(V)
 """
+
+
 def all_paths(edges: List[int], start: int, end: int) -> List[List[int]]:
     # We'll use DFS and store every valid path to our list
     result = []
@@ -416,9 +456,12 @@ def all_paths(edges: List[int], start: int, end: int) -> List[List[int]]:
 
     return result
 
+
 """
 Inner function
 """
+
+
 def _all_paths_inner(edges: List[int], start: int, end: int, visited: set, result: List[List[int]], curr_path: List[int]):
     # If we've found a valid path, add it to the results
     if start == end:
@@ -439,12 +482,15 @@ def _all_paths_inner(edges: List[int], start: int, end: int, visited: set, resul
             curr_path.pop()
             visited.remove(edge)
 
+
 """
 Exercise 3.1: Course Scheduling
 
 Time Complexity: O(V^2)
 Space Complexity: O(V + E)
 """
+
+
 def course_scheduling(num_courses: int, prerequisites: List[List[int]]) -> bool:
     # We'll convert our prerequisites into an adjacency list
     adj_list = [set() for _ in range(num_courses)]
@@ -482,12 +528,15 @@ def course_scheduling(num_courses: int, prerequisites: List[List[int]]) -> bool:
 
     return count == num_courses
 
+
 """
 Exercise 3.2: Course Scheduling II
 
 Time Complexity: O(V^2)
 Space Complexity: O(V + E)
 """
+
+
 def course_scheduling_ii(num_courses: int, prerequisites: List[List[int]]) -> List[int]:
     # We'll convert our prerequisites into an adjacency list
     adj_list = [set() for _ in range(num_courses)]
@@ -505,7 +554,6 @@ def course_scheduling_ii(num_courses: int, prerequisites: List[List[int]]) -> Li
 
     # We'll add courses to our result array as we take them
     result = []
-
 
     # Repeatedly remove dependencies until we've gone through all courses
     # or there are no courses that don't have dependencies
@@ -528,19 +576,22 @@ def course_scheduling_ii(num_courses: int, prerequisites: List[List[int]]) -> Li
 
     return []
 
+
 """
 Exercise 3.3: Alien Dictionary
 
 Time Complexity: O(max(sum(length of all strings), # unique characters ^ 2))
 Space Complexity: O(# unique characters)
 """
+
+
 def alien_dictionary(words: List[str]) -> str:
     # Per Leetcode testcases, ["abcd", "abc"] would be invalid. We specifically
     # check for this edge case here
-    for i in range(len(words)-1):
-        if len(words[i]) <= len(words[i+1]):
+    for i in range(len(words) - 1):
+        if len(words[i]) <= len(words[i + 1]):
             continue
-        if prefix_equal(words[i], words[i+1], len(words[i+1])):
+        if prefix_equal(words[i], words[i + 1], len(words[i + 1])):
             return ""
 
     # Generate a graph of which chars come before which other chars
@@ -572,9 +623,12 @@ def alien_dictionary(words: List[str]) -> str:
 
     return "".join(result)
 
+
 """
 Helper function to convert our strings into a graph
 """
+
+
 def generate_alien_graph(words: List[str]) -> dict:
     # Since our nodes are character values and not just integers, we'll
     # use a map rather than a list
@@ -589,27 +643,31 @@ def generate_alien_graph(words: List[str]) -> dict:
     # We compare each sequential pair of strings. We essentially just want
     # to find the first different character because that tells us which
     # character of the two comes first in lexographical order
-    for i in range(len(words)-1):
+    for i in range(len(words) - 1):
         # Find the first character that is different
-        for j in range(min(len(words[i]), len(words[i+1]))):
-            if words[i][j] == words[i+1][j]:
+        for j in range(min(len(words[i]), len(words[i + 1]))):
+            if words[i][j] == words[i + 1][j]:
                 continue
 
             # When we find a character that is different, add the dependency
             # to our adjacency list
-            adj_list[words[i+1][j]].add(words[i][j])
+            adj_list[words[i + 1][j]].add(words[i][j])
             break
 
     return adj_list
 
+
 """
 Helper function to test if two strings have the same prefix of length len
 """
+
+
 def prefix_equal(a: str, b: str, len: int):
     for i in range(len):
         if a[i] != b[i]:
             return False
     return True
+
 
 """
 Exercise 4.1: Keys and Rooms
@@ -617,6 +675,8 @@ Exercise 4.1: Keys and Rooms
 Time Complexity: O(# rooms + # keys)
 Space Complexity: O(# rooms)
 """
+
+
 def keys_and_rooms(rooms: List[List[int]]):
     # We do a graph search where the rooms are the nodes and the edges are
     # the keys in each room. BFS is a simpler implementation but we could
@@ -638,12 +698,15 @@ def keys_and_rooms(rooms: List[List[int]]):
     # Return true if we successfully visited all the rooms
     return len(visited) == len(rooms)
 
+
 """
 Exercise 4.2: Evaluate Division
 
 Time Complexity: O(# queries * # variables * # equations)
 Space Complexity: O(# variables)
 """
+
+
 def evaluate_division(equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
     # For each query, do DFS to determine series of operations required
     # to compute the value
@@ -653,9 +716,12 @@ def evaluate_division(equations: List[List[str]], values: List[float], queries: 
 
     return result
 
+
 """
 Do DFS
 """
+
+
 def _evaluate_division_inner(equations: List[List[str]], values: List[float], curr: str, dest: str, visited: set) -> float:
     # Check if we've already computed a variable
     if curr in visited:
@@ -689,6 +755,7 @@ def _evaluate_division_inner(equations: List[List[str]], values: List[float], cu
 
     return -1.0
 
+
 """
 Exercise 4.3: Sliding Puzzle
 
@@ -696,12 +763,14 @@ Time Complexity: O(1)
 Space Complexity: O(1)
 Given the fixed board size, the time doesn't change based on the input
 """
+
+
 def sliding_puzzle(board: List[List[int]]) -> int:
     # Since we have a fixed size board, we can explicitly express the
     # valid moves for each possible position of the empty space as well as
     # the win condition
-    moves = [[1,3],[0,2,4],[1,5],[0,4],[1,3,5],[2,4]];
-    solved = "123450";
+    moves = [[1, 3], [0, 2, 4], [1, 5], [0, 4], [1, 3, 5], [2, 4]]
+    solved = "123450"
 
     # We will represent the board as a string because it makes it way
     # easier for us to compare and add to a map
@@ -720,7 +789,7 @@ def sliding_puzzle(board: List[List[int]]) -> int:
             break
 
         # The index of the empty spot tells us what valid moves we can make
-        idx = curr.index('0')
+        idx = curr.index("0")
 
         for move in moves[idx]:
             swapped = _swap(curr, idx, move)
@@ -733,9 +802,12 @@ def sliding_puzzle(board: List[List[int]]) -> int:
 
     return depth[solved]
 
+
 """
 Simple helper function to swap two characters in a string
 """
+
+
 def _swap(s: str, i: int, j: int):
     l = list(s)
     temp = l[i]
@@ -747,36 +819,31 @@ def _swap(s: str, i: int, j: int):
 """
 Sample test cases
 """
-if __name__ == '__main__':
-    am = AdjacencyMatrix(4);
-    am.add_edge(1,2);
-    am.add_edge(1,3);
-    print(am.neighbors(1));
+if __name__ == "__main__":
+    am = AdjacencyMatrix(4)
+    am.add_edge(1, 2)
+    am.add_edge(1, 3)
+    print(am.neighbors(1))
 
+    al = AdjacencyList(4)
+    al.add_edge(1, 2)
+    al.add_edge(1, 3)
+    print(al.neighbors(1))
 
-    al = AdjacencyList(4);
-    al.add_edge(1,2);
-    al.add_edge(1,3);
-    print(al.neighbors(1));
-
-    matrix = [[False, False, False, True],
-              [True, False, True, True],
-              [True, False, False, True],
-              [False, True, False, False]]
+    matrix = [[False, False, False, True], [True, False, True, True], [True, False, False, True], [False, True, False, False]]
 
     print(adjacency_matrix_to_list(matrix))
 
-    print(adjacency_list_to_matrix(adjacency_matrix_to_list(matrix)));
+    print(adjacency_list_to_matrix(adjacency_matrix_to_list(matrix)))
 
-    node = Node(1);
-    node.neighbors.append(Node(2));
-    node.neighbors.append(Node(3));
-    print(clone_graph(node));
+    node = Node(1)
+    node.neighbors.append(Node(2))
+    node.neighbors.append(Node(3))
+    print(clone_graph(node))
 
-    adj_list = [[1,2],[0],[0],[4,5],[3,5],[3,4]];
-    print(valid_path_list(6, adj_list, 0, 1));
-    print(valid_path_list(6, adj_list, 0, 5));
-
+    adj_list = [[1, 2], [0], [0], [4, 5], [3, 5], [3, 4]]
+    print(valid_path_list(6, adj_list, 0, 1))
+    print(valid_path_list(6, adj_list, 0, 5))
 
     adj_matrix = [
         [False, True, True, False, False, False],
@@ -784,27 +851,27 @@ if __name__ == '__main__':
         [True, False, False, False, False, False],
         [False, False, False, False, True, True],
         [False, False, False, True, False, True],
-        [False, False, False, True, True, False]];
+        [False, False, False, True, True, False],
+    ]
 
-    print(valid_path_matrix(6, adj_matrix, 0, 1));
-    print(valid_path_matrix(6, adj_matrix, 0, 5));
+    print(valid_path_matrix(6, adj_matrix, 0, 1))
+    print(valid_path_matrix(6, adj_matrix, 0, 5))
 
+    adj_list[2].append(4)
+    print(length_of_shortest_path(adj_list, 0, 5))
+    print(shortest_path(adj_list, 0, 5))
+    print(all_paths(adj_list, 0, 5))
 
-    adj_list[2].append(4);
-    print(length_of_shortest_path(adj_list, 0, 5));
-    print(shortest_path(adj_list, 0, 5));
-    print(all_paths(adj_list, 0, 5));
+    print(course_scheduling(4, [[1, 0], [2, 0], [3, 1], [3, 2]]))
 
-    print(course_scheduling(4, [[1,0],[2,0],[3,1],[3,2]]));
+    print(course_scheduling_ii(4, [[1, 0], [2, 0], [3, 1], [3, 2]]))
 
-    print(course_scheduling_ii(4, [[1,0],[2,0],[3,1],[3,2]]));
+    print(alien_dictionary(["wrt", "wrf", "er", "ett", "rftt"]))
+    print(alien_dictionary(["ac", "ab", "zc", "zb"]))
 
-    print(alien_dictionary(["wrt", "wrf", "er", "ett", "rftt"]));
-    print(alien_dictionary(["ac", "ab", "zc", "zb"]));
+    print(keys_and_rooms([[1], [2], [3], []]))
 
-    print(keys_and_rooms([[1],[2],[3],[]]));
+    print(evaluate_division([["a", "b"], ["b", "c"]], [2.0, 3.0], [["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"]]))
 
-    print(evaluate_division([["a","b"],["b","c"]], [2.0, 3.0], [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]));
-
-    print(sliding_puzzle([[1,2,3],[4,0,5]]));
-    print(sliding_puzzle([[1,2,3],[5,4,0]]));
+    print(sliding_puzzle([[1, 2, 3], [4, 0, 5]]))
+    print(sliding_puzzle([[1, 2, 3], [5, 4, 0]]))

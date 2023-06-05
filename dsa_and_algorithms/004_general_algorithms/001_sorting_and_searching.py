@@ -7,8 +7,8 @@ we highly recommend you complete them before reviewing the solutions here.
 
 Execution: python sorting_and_searching_solutions.py
 """
-from typing import List
 import functools
+from typing import List
 
 """
 Exercise 1.1: Implement Binary Search on a sorted array
@@ -16,10 +16,12 @@ Exercise 1.1: Implement Binary Search on a sorted array
 Time Complexity: O(log n)
 Space Complexity: O(1)
 """
+
+
 def binary_search(arr: List[int], target: int) -> int:
     # Get the current upper and lower bounds
     lo = 0
-    hi = len(arr)-1
+    hi = len(arr) - 1
 
     # If lo > hi, then the value is not in the array
     while lo <= hi:
@@ -33,14 +35,15 @@ def binary_search(arr: List[int], target: int) -> int:
         # If value is greater than target, update hi so that we only look
         # at the lower half of the array
         if arr[mid] > target:
-            hi = mid-1
+            hi = mid - 1
 
         # Otherwise look at the greater half of the array
         else:
-            lo = mid+1
+            lo = mid + 1
 
     # We didn't find the value in the array so return -1
     return -1
+
 
 """
 Exercise 1.2: Find the closest number to target in a sorted array
@@ -48,6 +51,8 @@ Exercise 1.2: Find the closest number to target in a sorted array
 Time Complexity: O(log n)
 Space Complexity: O(1)
 """
+
+
 def closest_number(arr: List[int], target: int) -> int:
     if target <= arr[0]:
         return arr[0]
@@ -56,7 +61,7 @@ def closest_number(arr: List[int], target: int) -> int:
 
     # Get the current upper and lower bounds
     lo = 0
-    hi = len(arr)-1
+    hi = len(arr) - 1
 
     # Search for the value. If we find it, just return it. If we don't find
     # it, then we want to break out of our loop with lo equal to the index
@@ -72,23 +77,24 @@ def closest_number(arr: List[int], target: int) -> int:
         # If value is greater than target, update hi so that we only look
         # at the lower half of the array
         if arr[mid] > target:
-            hi = mid-1
-        elif arr[mid] < target and arr[mid+1] > target:
+            hi = mid - 1
+        elif arr[mid] < target and arr[mid + 1] > target:
             # If the value is between mid and mid+1, set lo = mid and break
             lo = mid
             break
         else:
             # Otherwise look at larger half of array
-            lo = mid+1
+            lo = mid + 1
 
     # We didn't find the exact value, but we found the index where it
     # should be. Look at the values on either side to see which is closer.
     # Because of our checks at the top, we know that lo is not 0 or
     # arr.length-1
-    if arr[lo+1] - target > target - arr[lo]:
-         return arr[lo]
+    if arr[lo + 1] - target > target - arr[lo]:
+        return arr[lo]
 
-    return arr[lo+1]
+    return arr[lo + 1]
+
 
 """
 Exercise 1.3: Find value in a rotated array
@@ -96,9 +102,11 @@ Exercise 1.3: Find value in a rotated array
 Time Complexity: O(log n)
 Space Complexity: O(1)
 """
-def search_rotated_array(nums: List[int], target: int)->int:
+
+
+def search_rotated_array(nums: List[int], target: int) -> int:
     # The bounds of our current sublist
-    low, high = 0, len(nums)-1
+    low, high = 0, len(nums) - 1
 
     # Keep dividing subarray in half until we either find the value we're
     # looking for or the subarray length is 0 (aka low >= high)
@@ -119,17 +127,18 @@ def search_rotated_array(nums: List[int], target: int)->int:
         if target < nums[mid]:
             # A sublist must contain pivot if nums[low] > nums[high]
             if nums[low] > nums[mid] or target >= nums[low]:
-                high = mid-1
+                high = mid - 1
             else:
-                low = mid+1
+                low = mid + 1
         else:
             # If target > nums[mid] we just do the opposite of above
             if nums[mid] > nums[high] or target <= nums[high]:
-                low = mid+1
+                low = mid + 1
             else:
-                high = mid-1
+                high = mid - 1
 
     return -1
+
 
 """
 Exercise 2.1: Implement mergesort
@@ -137,38 +146,39 @@ Exercise 2.1: Implement mergesort
 Time Complexity: O(n log n)
 Space Complexity: O(n)
 """
-def merge_sort(arr: List[int]):
 
+
+def merge_sort(arr: List[int]):
     # Merge two sorted subarrays. Subarrays are lo to mid inclusive and
     # mid+1 to hi inclusive
     def merge(arr: List[int], lo: int, mid: int, hi: int):
         # Copy each subarray into a separate array so that we don't overwrite
         # data as we merge them into the main array
-        lo_array = arr[lo:mid+1].copy()
-        hi_array = arr[mid+1:hi+1].copy()
+        lo_array = arr[lo : mid + 1].copy()
+        hi_array = arr[mid + 1 : hi + 1].copy()
 
         lo_idx = 0
         hi_idx = 0
-        for i in range(lo, hi+1):
+        for i in range(lo, hi + 1):
             if lo_idx >= len(lo_array):
                 arr[i] = hi_array[hi_idx]
-                hi_idx = hi_idx+1
+                hi_idx = hi_idx + 1
                 continue
 
             if hi_idx >= len(hi_array):
                 arr[i] = lo_array[lo_idx]
-                lo_idx = lo_idx+1
+                lo_idx = lo_idx + 1
                 continue
 
             if lo_array[lo_idx] < hi_array[hi_idx]:
                 arr[i] = lo_array[lo_idx]
-                lo_idx = lo_idx+1
+                lo_idx = lo_idx + 1
             else:
                 arr[i] = hi_array[hi_idx]
-                hi_idx = hi_idx+1
+                hi_idx = hi_idx + 1
 
     # Inner recursive function that sorts subarray from lo to hi inclusive
-    def merge_sort_inner(arr: List[int], lo: int = 0, hi: int = len(arr)-1):
+    def merge_sort_inner(arr: List[int], lo: int = 0, hi: int = len(arr) - 1):
         # If lo >= hi, then the subarray is length 0 or 1 and therefore already
         # sorted
         if lo >= hi:
@@ -177,12 +187,13 @@ def merge_sort(arr: List[int]):
         # Find midpoint and sort each half of array
         mid = (lo + hi) // 2
         merge_sort_inner(arr, lo, mid)
-        merge_sort_inner(arr, mid+1, hi)
+        merge_sort_inner(arr, mid + 1, hi)
 
         # Merge the two sorted halves into a single array
         merge(arr, lo, mid, hi)
 
     merge_sort_inner(arr)
+
 
 """
 Exercise 2.2: Implement Quicksort on an array
@@ -190,6 +201,8 @@ Exercise 2.2: Implement Quicksort on an array
 * Time Complexity: O(n^2)
 * Space Complexity: O(n)
 """
+
+
 def quick_sort(arr: List[int]):
     # Partition array into a larger and smaller half using the first element
     # in the array as the dividing point
@@ -199,7 +212,7 @@ def quick_sort(arr: List[int]):
         partition_val = arr[lo]
 
         # We will start with a pointer at arr[1] and arr[arr.length-1]
-        i = lo+1
+        i = lo + 1
         j = hi
 
         while i <= j:
@@ -207,25 +220,25 @@ def quick_sort(arr: List[int]):
             # array so we don't want to move it. Just increment i to leave it
             # in place
             if arr[i] <= partition_val:
-                i = i+1
+                i = i + 1
 
             # Otherwise, we swap arr[i] and arr[j] to move arr[i] to the other
             # side of our partition. We can now decrement j because we know
             # that everything at j or greater is larger than the partition
             else:
                 arr[i], arr[j] = arr[j], arr[i]
-                j = j-1
+                j = j - 1
 
         # Currently our partition is at the beginning of our array and
         # most likely out of order. Move it to the middle so that it properly
         # sits between the two partitions
-        arr[i-1], arr[lo] = arr[lo], arr[i-1]
+        arr[i - 1], arr[lo] = arr[lo], arr[i - 1]
 
-        return i-1
+        return i - 1
 
     # Inner recursive function. Partition array and then recursively perform
     # quicksort on each partition
-    def quick_sort_inner(arr: List[int], lo: int = 0, hi: int = len(arr)-1):
+    def quick_sort_inner(arr: List[int], lo: int = 0, hi: int = len(arr) - 1):
         # Our subarray is length 0 or 1 and already sorted
         if lo >= hi:
             return
@@ -234,18 +247,22 @@ def quick_sort(arr: List[int]):
         p = partition(arr, lo, hi)
 
         # Sort each partition
-        quick_sort_inner(arr, lo, p-1)
-        quick_sort_inner(arr, p+1, hi)
+        quick_sort_inner(arr, lo, p - 1)
+        quick_sort_inner(arr, p + 1, hi)
 
     quick_sort_inner(arr)
+
 
 """
 Simple list node class copied from Leetcode: https://leetcode.com/problems/sort-list/
 """
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+
 
 """
 Exercise 3.1: Sort a Linked List
@@ -253,6 +270,8 @@ Exercise 3.1: Sort a Linked List
 Time Complexity: O(n log n)
 Space Complexity: O(log n)
 """
+
+
 def sort_list(head: ListNode) -> ListNode:
     # If the list contains 0 or 1 nodes, it is already sorted
     if not head or not head.next:
@@ -280,9 +299,12 @@ def sort_list(head: ListNode) -> ListNode:
     # Merge the sorted halves
     return merge_lists(first_half, second_half)
 
+
 """
 Merge two sorted lists
 """
+
+
 def merge_lists(l1: ListNode, l2: ListNode) -> ListNode:
     dummy_head = ListNode()
     curr = dummy_head
@@ -314,12 +336,15 @@ def merge_lists(l1: ListNode, l2: ListNode) -> ListNode:
 
     return dummy_head.next
 
+
 """
 Exercise 3.2: Find the largest number
 
 Time Complexity: O(n log n)
 Space Complexity: O(n)
 """
+
+
 def largest_number(nums: List[int]) -> str:
     # We ultimately need to treat this as a string, so let's go ahead and
     # convert everything
@@ -330,8 +355,8 @@ def largest_number(nums: List[int]) -> str:
     # To determine which string comes first, see what happens when we
     # concatenate them each way. We want the largest resulting string
     def compare(s1: str, s2: str) -> int:
-        s1_first = s1+s2
-        s2_first = s2+s1
+        s1_first = s1 + s2
+        s2_first = s2 + s1
 
         #  Since we want the largest strings first, reverse the order
         if s1_first < s2_first:
@@ -347,12 +372,15 @@ def largest_number(nums: List[int]) -> str:
     # Otherwise join our array
     return "".join(num_strings)
 
+
 """
 Exercise 3.3: Find the square root
 
 Time Complexity: O(log x)
 Space Complexity: O(1)
 """
+
+
 def square_root(x: int) -> int:
     # If x == the square root is 0
     if x == 0:
@@ -361,7 +389,7 @@ def square_root(x: int) -> int:
     # We'll do binary search, so establish starting bounds. Square root
     # cannot be more than half of the value
     lo = 1
-    hi = x//2
+    hi = x // 2
 
     # Perform search
     while lo < hi:
@@ -370,14 +398,15 @@ def square_root(x: int) -> int:
         # We cannot do mid*mid > x because of overflow error, so this is
         # the same expression rearranged to use division and avoid overflow
         if mid * mid > x:
-            hi = mid-1
-        elif (mid+1)*(mid+1) > x:
+            hi = mid - 1
+        elif (mid + 1) * (mid + 1) > x:
             # If mid is too low but mid+1 is too high, then return mid
             return mid
         else:
-            lo = mid+1
+            lo = mid + 1
 
     return lo
+
 
 """
 Exercise 3.4: Split Array Largest Sum
@@ -385,6 +414,8 @@ Exercise 3.4: Split Array Largest Sum
 Time Complexity: O(log(sum(arr)) * arr.length)
 Space Complexity: O(1)
 """
+
+
 def split_largest(arr: List[int], m: int) -> int:
     # We know that our value must be between the max individual value in
     # the array and the sum of the total array. So we'll just do binary
@@ -399,21 +430,24 @@ def split_largest(arr: List[int], m: int) -> int:
     lo = max_val
     hi = arr_sum
     while lo <= hi:
-        mid = (lo + hi)//2
+        mid = (lo + hi) // 2
 
         # If the array can be validly divided with the current max sum, try
         # a smaller max sum
         if valid(arr, m, mid):
-            hi = mid-1
+            hi = mid - 1
         else:
-            lo =  mid+1
+            lo = mid + 1
 
     return lo
+
 
 """
 Determine whether an array can be divided into <= m subarrays all with
 sum of <= maxSum.
 """
+
+
 def valid(arr: List[int], m: int, max_sum: int) -> bool:
     subarray_count = 1
     subarray_sum = 0
@@ -424,7 +458,7 @@ def valid(arr: List[int], m: int, max_sum: int) -> bool:
     for a in arr:
         subarray_sum = subarray_sum + a
         if subarray_sum > max_sum:
-            subarray_count = subarray_count+1
+            subarray_count = subarray_count + 1
             subarray_sum = a
 
             if subarray_count > m:
@@ -432,22 +466,23 @@ def valid(arr: List[int], m: int, max_sum: int) -> bool:
 
     return True
 
+
 # Sample test cases
-if __name__ == '__main__':
-    print(binary_search([1,2,3,4,5,6], 5))
+if __name__ == "__main__":
+    print(binary_search([1, 2, 3, 4, 5, 6], 5))
 
-    print(closest_number([1,2,3,4,5,6], 0))
-    print(closest_number([1,2,5,6], 3))
-    print(closest_number([1,6], 3))
+    print(closest_number([1, 2, 3, 4, 5, 6], 0))
+    print(closest_number([1, 2, 5, 6], 3))
+    print(closest_number([1, 6], 3))
 
-    print(search_rotated_array([4,5,6,7,0,1,2], 0))
-    print(search_rotated_array([4,5,6,7,0,1,2], 3))
+    print(search_rotated_array([4, 5, 6, 7, 0, 1, 2], 0))
+    print(search_rotated_array([4, 5, 6, 7, 0, 1, 2], 3))
 
-    arr = [1,5,3,3,7,6,9,1]
+    arr = [1, 5, 3, 3, 7, 6, 9, 1]
     merge_sort(arr)
     print(arr)
 
-    arr2 = [1,5,3,3,7,6,9,1]
+    arr2 = [1, 5, 3, 3, 7, 6, 9, 1]
     quick_sort(arr2)
     print(arr2)
 
@@ -460,9 +495,9 @@ if __name__ == '__main__':
         print(l.val)
         l = l.next
 
-    print(largest_number([3,30,34,5,9]))
+    print(largest_number([3, 30, 34, 5, 9]))
 
     print(square_root(4))
     print(square_root(8))
 
-    print(split_largest([7,2,5,10,8], 2))
+    print(split_largest([7, 2, 5, 10, 8], 2))
