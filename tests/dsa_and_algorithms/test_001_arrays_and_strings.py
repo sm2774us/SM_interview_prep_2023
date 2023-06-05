@@ -18,7 +18,7 @@ from dsa_and_algorithms.001_linear_data_structures.001_arrays_and_strings import
     subarray_sums,
     no_repeated_chars,
     find_all_anagrams,
-    smallest_substring
+    smallest_substring,
 )
 
 @pytest.mark.parametrize(
