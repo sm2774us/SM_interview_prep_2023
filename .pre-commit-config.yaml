@@ -24,9 +24,19 @@ repos:
     rev: 23.3.0
     hooks:
       - id: black
+        entry: bash -c 'black "$@"; git add -u' --
         exclude: ^(tests/|\.github/|\.venv/|\.vscode/)
         args:
           - --target-version=py311
+
+  # Autoformat: Python code
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        entry: bash -c 'isort "$@"; git add -u' --
+        args:
+          - --profile=black
 
   # Autoformat: Bash scripts
   - repo: https://github.com/lovesegfault/beautysh
