@@ -1,12 +1,7 @@
 [flake8]
 exclude =
-    migrations
-    __pycache__
-    .github
-    env
-    .env
-    .venv
-    .vscode
+    .*/
+    tests/    
 # Ignore style and complexity
 # E: style errors
 # W: style warnings
