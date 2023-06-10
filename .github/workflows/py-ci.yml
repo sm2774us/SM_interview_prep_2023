@@ -1,28 +1,8 @@
-name: Python CI
+name: py-ci
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - 'dsa_and_algorithms/**'
-      - 'coding_interview_problems/**'
-      - 'competitive_programming_problems/**'
-      - 'curated_list_of_75_leetcode_problems/**'
-      - 'amazon_interview_prep/**'
-      - 'facebook_interview_prep/**'
   pull_request:
-    types:
-      - opened
-    branches:
-      - 'releases/**'  
-    paths:
-      - 'dsa_and_algorithms/**'
-      - 'coding_interview_problems/**'
-      - 'competitive_programming_problems/**'
-      - 'curated_list_of_75_leetcode_problems/**'
-      - 'amazon_interview_prep/**'
-      - 'facebook_interview_prep/**'
 
 jobs:
   pre-commit:

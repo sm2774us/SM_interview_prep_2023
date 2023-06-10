@@ -5,7 +5,6 @@ name: pre-commit
 on:
   push:
   pull_request:
-  workflow_call:  # allows reuse of this workflow
 
 permissions:
   contents: read #  to fetch code (actions/checkout)
