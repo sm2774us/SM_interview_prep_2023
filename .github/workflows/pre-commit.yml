@@ -75,3 +75,7 @@ jobs:
         with:
           name: pre-commit.log
           path: /github/home/.cache/pre-commit/pre-commit.log
+
+  pre-commit-calls-py-ci:
+    uses: sm2774us/SM_interview_prep_2023/.github/workflows/py-ci.yml@main
+    secrets: inherit # pass all secrets
