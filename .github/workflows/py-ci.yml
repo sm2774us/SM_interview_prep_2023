@@ -74,6 +74,7 @@ jobs:
           name: pre-commit.log
           path: /github/home/.cache/pre-commit/pre-commit.log
   build:
+    needs: pre-commit
     runs-on: ubuntu-latest
     env:
         working-directory: ./
