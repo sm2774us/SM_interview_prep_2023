@@ -23,9 +23,10 @@ on:
       - 'curated_list_of_75_leetcode_problems/**'
       - 'amazon_interview_prep/**'
       - 'facebook_interview_prep/**'
-  workflow_dispatch:
 
 jobs:
+  pre-commit:
+    uses: sm2774us/SM_interview_prep_2023/.github/workflows/pre-commit.yml@main  
   build:
     runs-on: ubuntu-latest
     env:
